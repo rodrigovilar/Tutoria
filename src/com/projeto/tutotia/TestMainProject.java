@@ -1,14 +1,16 @@
 package com.projeto.tutotia;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
+import org.junit.Before;
 
 public class TestMainProject {
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
+	private GestorAuxiliarParaSistema gestor;
 
+	@Before
+	public void iniciarTest() {
+		this.gestor = new GestorAuxiliarParaSistema();
+		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
+	}
 }
