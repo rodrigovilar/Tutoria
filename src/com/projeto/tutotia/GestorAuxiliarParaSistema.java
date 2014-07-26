@@ -77,12 +77,43 @@ public class GestorAuxiliarParaSistema {
 		return this.alunos;
 	}
 
-	public Aluno pesquisaAlunoPeloNome(String nome) throws AlunoInexistenteException {
+	public Aluno pesquisaAlunoPeloNome(String nome)
+			throws AlunoInexistenteException {
 		for (Aluno alu : this.alunos) {
 			if (alu.getNome().equals(nome)) {
 				return alu;
 			}
 		}
 		throw new AlunoInexistenteException("Aluno Inexistente");
+	}
+
+	public Object pesquisarAlunoPelaMatricula(String matricula)
+			throws AlunoInexistenteException {
+		for (Aluno aluno1 : this.alunos) {
+			if (aluno1.getMatricula().equals(matricula)) {
+				return aluno1;
+			}
+		}
+		throw new AlunoInexistenteException("Aluno Inexistente");
+
+	}
+
+
+
+	public void removerAlunoPelaMatricula(String matricula) {
+		// TODO Auto-generated method stub
+		boolean removeu = false;
+		for (Aluno a : this.alunos) {
+			if (a.getMatricula().equals(matricula)) {
+				this.alunos.remove(a);
+				removeu = true;
+				break;
+			}
+
+		}
+		if (removeu == false) {
+			throw new AlunoInexistenteException("Aluno não existe!");
+		}
+		
 	}
 }

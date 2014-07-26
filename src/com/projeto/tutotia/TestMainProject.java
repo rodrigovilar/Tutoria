@@ -58,4 +58,18 @@ public class TestMainProject {
 		assertEquals(aluno1, gestor.pesquisaAlunoPeloNome("Otaciso"));
 	}
 
+	@Test
+	public void pesquisarAlunoPelaMatriculaTest() throws Exception {
+		Aluno aluno1 = new Aluno("Otaciso", "81011053");
+		gestor.cadastrarAluno(aluno1);
+		assertEquals(aluno1, gestor.pesquisarAlunoPelaMatricula("81011053"));
+	}
+	
+	@Test
+	public void removerAlunoPelaMatriculaTest() throws Exception {
+		Aluno aluno = new Aluno("Otaciso", "81011053");
+		gestor.cadastrarAluno(aluno);
+		gestor.removerAlunoPelaMatricula("81011053");
+	}
+
 }
