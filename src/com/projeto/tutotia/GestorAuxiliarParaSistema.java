@@ -55,4 +55,24 @@ public class GestorAuxiliarParaSistema {
 		}
 
 	}
+
+	public void cadastrarAluno(Aluno alunos) {
+		boolean existe = false;
+		for (Aluno aluno : this.alunos) {
+			if (aluno.getMatricula().equals(aluno.getMatricula())) {
+				existe = true;
+				break;
+			}
+		}
+		if (existe == false) {
+			this.alunos.add(alunos);
+		} else {
+			throw new AlunoExistenteException("Aluno Existente!");
+		}
+	}
+
+	public List<Aluno> getListaDeAlunosCriados() {
+
+		return this.alunos;
+	}
 }

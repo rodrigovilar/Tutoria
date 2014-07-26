@@ -41,4 +41,14 @@ public class TestMainProject {
 		gestor.removeTutorPeloId("12345");
 	}
 
+	// Aluno
+	@Test
+	public void cadastraAlunoNoGestorTest() throws Exception {
+		Aluno alunos = new Aluno("Otaciso", "81011053");
+		gestor.cadastrarAluno(alunos);
+		List<Aluno> listAluno = gestor.getListaDeAlunosCriados();
+		assertEquals(1, listAluno.size());
+
+	}
+
 }
