@@ -31,4 +31,28 @@ public class GestorAuxiliarParaSistema {
 		return this.tutores;
 	}
 
+	public Tutor pesquisarTutorPeloId(String id)
+			throws TutorInexistenteException {
+		for (Tutor t : this.tutores) {
+			if (t.getMatricula().equals(id)) {
+				return t;
+			}
+		}
+		throw new TutorInexistenteException("Tutor Inexistente");
+	}
+
+	public void removeTutorPeloId(String id) throws TutorInexistenteException {
+		boolean removeu = false;
+		for (Tutor t : this.tutores) {
+			if (t.getMatricula().equals(id)) {
+				this.tutores.remove(t);
+				removeu = true;
+				break;
+			}
+		}
+		if (removeu == false) {
+			throw new TutorInexistenteException("Tutor não existe!");
+		}
+
+	}
 }

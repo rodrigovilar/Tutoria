@@ -17,7 +17,7 @@ public class TestMainProject {
 		this.gestor = new GestorAuxiliarParaSistema();
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
 	}
-	
+
 	// Tutor
 	@Test
 	public void cadastrarTutorNoSistemaTest() throws Exception {
@@ -25,6 +25,20 @@ public class TestMainProject {
 		gestor.cadastraTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutor();
 		assertEquals(1, listTut.size());
+	}
+
+	@Test
+	public void pesquisarTutorPeloIdTest() throws Exception {
+		Tutor t = new Tutor("Otaciso", "123.456.789.01");
+		gestor.cadastraTutor(t);
+		assertEquals(t, gestor.pesquisarTutorPeloId("123.456.789.01"));
+	}
+
+	@Test
+	public void removeTutorPeloIdTest() throws Exception {
+		Tutor tutor = new Tutor("Otaciso", "12345");
+		gestor.cadastraTutor(tutor);
+		gestor.removeTutorPeloId("12345");
 	}
 
 }
