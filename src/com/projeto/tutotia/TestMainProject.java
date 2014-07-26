@@ -51,4 +51,11 @@ public class TestMainProject {
 
 	}
 
+	@Test
+	public void pesquisarAlunoPeloNomeTest() throws Exception {
+		Aluno aluno1 = new Aluno("Otaciso", "81011053");
+		gestor.cadastrarAluno(aluno1);
+		assertEquals(aluno1, gestor.pesquisaAlunoPeloNome("Otaciso"));
+	}
+
 }

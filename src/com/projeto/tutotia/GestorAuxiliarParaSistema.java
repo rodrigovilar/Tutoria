@@ -56,6 +56,7 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
+	// Aluno
 	public void cadastrarAluno(Aluno alunos) {
 		boolean existe = false;
 		for (Aluno aluno : this.alunos) {
@@ -74,5 +75,14 @@ public class GestorAuxiliarParaSistema {
 	public List<Aluno> getListaDeAlunosCriados() {
 
 		return this.alunos;
+	}
+
+	public Aluno pesquisaAlunoPeloNome(String nome) throws AlunoInexistenteException {
+		for (Aluno alu : this.alunos) {
+			if (alu.getNome().equals(nome)) {
+				return alu;
+			}
+		}
+		throw new AlunoInexistenteException("Aluno Inexistente");
 	}
 }
