@@ -57,23 +57,28 @@ public class GestorAuxiliarParaSistema {
 	}
 
 	// Aluno
+
 	public void cadastrarAluno(Aluno alunos) {
 		boolean existe = false;
 		for (Aluno aluno : this.alunos) {
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
+
 				existe = true;
-				break;
+				// Verificar com professor
+				throw new ExcecaoAlunoDuplicado();
+				// break;
 			}
 		}
 		if (existe == false) {
+
 			this.alunos.add(alunos);
 		} else {
 			throw new AlunoExistenteException("Aluno Existente!");
 		}
+
 	}
 
 	public List<Aluno> getListaDeAlunosCriados() {
-
 		return this.alunos;
 	}
 
@@ -95,10 +100,7 @@ public class GestorAuxiliarParaSistema {
 			}
 		}
 		throw new AlunoInexistenteException("Aluno Inexistente");
-
 	}
-
-
 
 	public void removerAlunoPelaMatricula(String matricula) {
 		// TODO Auto-generated method stub
@@ -109,11 +111,10 @@ public class GestorAuxiliarParaSistema {
 				removeu = true;
 				break;
 			}
-
 		}
 		if (removeu == false) {
 			throw new AlunoInexistenteException("Aluno não existe!");
 		}
-		
+
 	}
 }
