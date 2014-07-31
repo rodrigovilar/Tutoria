@@ -179,5 +179,19 @@ public class GestorAuxiliarParaSistema {
 		}
 		return null;
 	}
-
+	
+	
+	public void removerAula(String iDAula) {
+		boolean removeu = false;
+		for(Aula a : this.aulas){
+			if(a.getIdAula().equals(iDAula)){
+				this.aulas.remove(a);
+				removeu = true;
+				break;
+			}
+		}
+		if(!removeu){
+			throw new RuntimeException("ERRO!");
+		}
+	}
 }

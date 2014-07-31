@@ -81,9 +81,9 @@ public class TestMainProject {
 		List<Tutor> listaCoord = gestor.getListaDeTutores();
 		assertEquals(5, listaCoord.size());
 	}
-	
+
 	@Test(expected = TutorInexistenteException.class)
-	public void pesquisarTutorInexistenteTest() throws Exception{
+	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
 		gestor.cadastraTutor(t);
 		gestor.pesquisarTutorPeloId("00000");
@@ -177,21 +177,38 @@ public class TestMainProject {
 		List<Aula> aulas = gestor.getListaDeAulas();
 		assertEquals(1, aulas.size());
 	}
-	
+
 	@Test
-	public void pesquisarAulaTest(){
+	public void pesquisarAulaTest() {
 		Aula aula = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(aula);
 		Aula aulap = gestor.pesquisaAula("05");
-		assertEquals(aula,aulap);	
+		assertEquals(aula, aulap);
 	}
-	
+
 	@Test
 	public void pesquisarAulaInexistenteTest() {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(a);
 		Aula aula = gestor.pesquisaAula("-1");
 		assertNull(aula);
+	}
+
+	@Test
+	public void verificarTamanhoDaListadeAulaTest() {
+		Aula aI = new Aula("Pesquisar sobre a Ead", " P-01 ");
+		gestor.cadastrarAula(aI);
+		Aula aII = new Aula("Pesquisar sobre a Ead", " P-02 ");
+		gestor.cadastrarAula(aII);
+		Aula aIII = new Aula("Pesquisar sobre a Ead", " P-03 ");
+		gestor.cadastrarAula(aIII);
+		Aula aIV = new Aula("Pesquisar sobre a Ead", " P-04 ");
+		gestor.cadastrarAula(aIV);
+		Aula aV = new Aula("Pesquisar sobre a Ead", " P-05 ");
+		gestor.cadastrarAula(aV);
+		gestor.removerAula(" P-05 ");
+		List<Aula> listTarefa = gestor.getListaDeAulas();
+		assertEquals(4, listTarefa.size());
 	}
 
 }

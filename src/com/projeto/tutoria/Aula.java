@@ -3,12 +3,11 @@ package com.projeto.tutoria;
 public class Aula {
 	private String descrição;
 	private String IdAula;
-	
 
-	public Aula(String descrição, String idDevere) {
+	public Aula(String descrição, String idAula) {
 		super();
 		this.descrição = descrição;
-		IdAula = idDevere;
+		IdAula = idAula;
 	}
 
 	public String getDescrição() {
@@ -23,8 +22,8 @@ public class Aula {
 		return IdAula;
 	}
 
-	public void setIdDevere(String idDevere) {
-		IdAula = idDevere;
+	public void setIdAula(String idAula) {
+		IdAula = idAula;
 	}
 
 }
