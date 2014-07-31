@@ -67,7 +67,7 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void verificarTamanhoDaListadeTutoresTest() throws Exception {
+	public void verificarListadeTutoresCadastradosTest() throws Exception {
 		Tutor t1 = new Tutor("Mateus", "11111");
 		Tutor t2 = new Tutor("Kaué", "22222");
 		Tutor t3 = new Tutor("Otaciso", "333333");
@@ -209,6 +209,22 @@ public class TestMainProject {
 		gestor.removerAula(" P-05 ");
 		List<Aula> listTarefa = gestor.getListaDeAulas();
 		assertEquals(4, listTarefa.size());
+	}
+	
+	@Test(expected = ExcecaoAlunoDuplicado.class)
+	public void verificarListadeAlunosCadastradosTest(){
+		Aluno aI = new Aluno("Mateus", "11111");
+		Aluno aII = new Aluno("Kaué", "22222");
+		Aluno aIII = new Aluno("Otaciso", "333333");
+		Aluno aIV = new Aluno("Thiego", "444444");
+		Aluno aV = new Aluno("Daniel", "555555");
+		gestor.cadastrarAluno(aI);
+		gestor.cadastrarAluno(aII);
+		gestor.cadastrarAluno(aIII);
+		gestor.cadastrarAluno(aIV);
+		gestor.cadastrarAluno(aV);
+		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCriados();
+		assertEquals(2,alunoCadastrados.size());	
 	}
 
 }

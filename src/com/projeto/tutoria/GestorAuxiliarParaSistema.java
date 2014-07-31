@@ -63,22 +63,25 @@ public class GestorAuxiliarParaSistema {
 
 	public void cadastrarAluno(Aluno alunos) {
 		boolean existe = false;
+		
 		for (Aluno aluno : this.alunos) {
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
 
 				existe = true;
 				// Verificar com professor
 				throw new ExcecaoAlunoDuplicado();
+				
 
-				// break;
+				 //break;
 			}
 		}
 		if (existe == false) {
-
+			
 			this.alunos.add(alunos);
+			
 		} else {
 			throw new AlunoExistenteException("Aluno Existente!");
-		}
+		}//throw new ExcecaoAlunoDuplicado();
 
 	}
 
