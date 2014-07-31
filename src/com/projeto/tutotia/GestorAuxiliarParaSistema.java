@@ -80,10 +80,6 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public List<Aluno> getListaDeAlunosCriados() {
-		return this.alunos;
-	}
-
 	public Aluno pesquisaAlunoPeloNome(String nome)
 			throws AlunoInexistenteException {
 		for (Aluno alu : this.alunos) {
@@ -120,5 +116,14 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
+	public List<Aluno> getListaDeAlunosCriados() {
+
+		return alunos;
+	}
+
+	public List<Tutor> getListaDeTutores() {
+
+		return tutores;
+	}
 
 }

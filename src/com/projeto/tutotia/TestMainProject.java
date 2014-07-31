@@ -11,7 +11,7 @@ import org.junit.Test;
 public class TestMainProject {
 
 	private GestorAuxiliarParaSistema gestor;
-
+	//private PlataformaDeGerenciaEad gestorAux = new PlataformaDeGerenciaEad();
 
 	@Before
 	public void iniciarTest() {
@@ -57,20 +57,29 @@ public class TestMainProject {
 		gestor.cadastraTutor(t1);
 		gestor.cadastraTutor(t2);
 	}
-	
-/*	@Test//(expected = ObjetoInexistenteException.class)
-	public void removerTutorInexistente() throws Exception {
-		GestorAuxiliarParaSistema g1= new GestorAuxiliarParaSistema();
-		gestor.cadastraTutor(tut);
-		Tutor novoJogo = new Tutor();
-		Professor p2 = instanciarObjetoProfessor();
-		p2.setNome("Joao");
-		p2.setSenha("01013456");
-		novoJogo.removerProfessor(p2);
+
+	@Test(expected = TutorInexistenteException.class)
+	public void removerTutorInexistenteTest() throws Exception {
+		Tutor tutor = new Tutor("Thiego", "12345");
+		gestor.cadastraTutor(tutor);
+		gestor.removeTutorPeloId("54321");
 	}
-	*/
 
-
+	@Test
+	public void verificarTamanhoDaListadeTutoresTest() throws Exception {
+		Tutor t1 = new Tutor("Mateus" , "11111");
+		Tutor t2 = new Tutor("Kaué"   , "22222");
+		Tutor t3 = new Tutor("Otaciso", "333333");
+		Tutor t4 = new Tutor("Thiego" , "444444");
+		Tutor t5 = new Tutor("Daniel" , "555555");
+		gestor.cadastraTutor(t1);
+		gestor.cadastraTutor(t2);
+		gestor.cadastraTutor(t3);
+		gestor.cadastraTutor(t4);
+		gestor.cadastraTutor(t5);
+		List<Tutor> listaCoord = gestor.getListaDeTutores();
+		assertEquals(5, listaCoord.size());
+	}
 
 	// Aluno
 	@Test
@@ -103,7 +112,6 @@ public class TestMainProject {
 		gestor.pesquisarAlunoPelaMatricula("81011053");
 	}
 
-	// Verificar com professor #########################
 	@Test(expected = ExcecaoAlunoDuplicado.class)
 	public void cadastroDoMesmoAlunoTest() {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
@@ -119,10 +127,10 @@ public class TestMainProject {
 		gestor.cadastrarAluno(al1);
 		gestor.cadastrarAluno(al2);
 	}
-	
+
 	@Test(expected = AlunoInexistenteException.class)
-	public void removerAlunoInexistenteTest(){
-		Aluno aluno = new Aluno ("Thiego", "12345");
+	public void removerAlunoInexistenteTest() {
+		Aluno aluno = new Aluno("Thiego", "12345");
 		gestor.cadastrarAluno(aluno);
 		gestor.removerAlunoPelaMatricula("54321");
 	}
