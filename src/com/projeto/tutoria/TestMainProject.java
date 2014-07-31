@@ -82,6 +82,13 @@ public class TestMainProject {
 		List<Tutor> listaCoord = gestor.getListaDeTutores();
 		assertEquals(5, listaCoord.size());
 	}
+	
+	@Test(expected = TutorInexistenteException.class)
+	public void pesquisarTutorInexistenteTest() throws Exception{
+		Tutor t = new Tutor("Oscar", "12345");
+		gestor.cadastraTutor(t);
+		gestor.pesquisarTutorPeloId("00000");
+	}
 
 	// Aluno
 	@Test
