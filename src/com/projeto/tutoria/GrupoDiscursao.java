@@ -69,6 +69,8 @@ public class GrupoDiscursao {
 		}
 		return null;
 	}
+	
+
 
 	@Override
 	public String toString() {

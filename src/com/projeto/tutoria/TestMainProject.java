@@ -94,7 +94,7 @@ public class TestMainProject {
 	public void cadastraAlunoNoGestorTest() throws Exception {
 		Aluno alunos = new Aluno("Otaciso", "81011053");
 		gestor.cadastrarAluno(alunos);
-		List<Aluno> listAluno = gestor.getListaDeAlunosCriados();
+		List<Aluno> listAluno = gestor.getListaDeAlunosCadastrados();
 		assertEquals(1, listAluno.size());
 
 	}
@@ -174,7 +174,7 @@ public class TestMainProject {
 		GrupoDiscursao gd = new GrupoDiscursao(a, "A-03");
 		gestor.cadastrarGrupoDiscursao(gd);
 		gestor.adicionarAulaAoGrupo(a, gd);
-		List<Aula> aulas = gestor.getListaDeAulas();
+		List<Aula> aulas = gestor.getListaDeAulasCadastradas();
 		assertEquals(1, aulas.size());
 	}
 
@@ -207,7 +207,7 @@ public class TestMainProject {
 		Aula aV = new Aula("Pesquisar sobre a Ead", " P-05 ");
 		gestor.cadastrarAula(aV);
 		gestor.removerAula(" P-05 ");
-		List<Aula> listTarefa = gestor.getListaDeAulas();
+		List<Aula> listTarefa = gestor.getListaDeAulasCadastradas();
 		assertEquals(4, listTarefa.size());
 	}
 	
@@ -223,8 +223,21 @@ public class TestMainProject {
 		gestor.cadastrarAluno(aIII);
 		gestor.cadastrarAluno(aIV);
 		gestor.cadastrarAluno(aV);
-		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCriados();
+		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
 		assertEquals(2,alunoCadastrados.size());	
+	}
+	
+	public void removerAulaDoGrupoDiscursaoTest() throws GrupoJaexisteException, GrupoInexistenteException{
+		Aula a = new Aula("Enviar Exercio ao Modle", "05");
+		gestor.cadastrarAula(a);
+		GrupoDiscursao gd = new GrupoDiscursao("0000-1");
+		gestor.cadastrarGrupoDiscursao(gd);
+		Aula a1 = gestor.pesquisaAula("05");
+		GrupoDiscursao gd1 = gestor.pesquisarGrupo("0000-1");
+		gestor.adicionarAulaAoGrupo(a1, gd1);
+		gestor.removerAulaDoGrupoDiscursao(a1, gd1);
+		List<Aula> aulas = gestor.getListaDeAulasCadastradas(gd1);
+		assertEquals(0, aulas.size());
 	}
 
 }

@@ -29,11 +29,6 @@ public class GestorAuxiliarParaSistema {
 		}
 	}
 
-	public List<Tutor> getListaDeTutor() {
-
-		return this.tutores;
-	}
-
 	public Tutor pesquisarTutorPeloId(String id)
 			throws TutorInexistenteException {
 		for (Tutor t : this.tutores) {
@@ -63,25 +58,24 @@ public class GestorAuxiliarParaSistema {
 
 	public void cadastrarAluno(Aluno alunos) {
 		boolean existe = false;
-		
+
 		for (Aluno aluno : this.alunos) {
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
 
 				existe = true;
 				// Verificar com professor
 				throw new ExcecaoAlunoDuplicado();
-				
 
-				 //break;
+				// break;
 			}
 		}
 		if (existe == false) {
-			
+
 			this.alunos.add(alunos);
-			
+
 		} else {
 			throw new AlunoExistenteException("Aluno Existente!");
-		}//throw new ExcecaoAlunoDuplicado();
+		}// throw new ExcecaoAlunoDuplicado();
 
 	}
 
@@ -121,7 +115,12 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public List<Aluno> getListaDeAlunosCriados() {
+	public List<Tutor> getListaDeTutor() {
+
+		return this.tutores;
+	}
+
+	public List<Aluno> getListaDeAlunosCadastrados() {
 
 		return alunos;
 	}
@@ -133,6 +132,22 @@ public class GestorAuxiliarParaSistema {
 
 	public void cadastrarAula(Aula aula) {
 		this.aulas.add(aula);
+
+	}
+
+	public List<Aula> getListaDeAulasCadastradas() {
+
+		return aulas;
+	}
+	
+	public List<Aula> getListaDeAulasCadastradas(GrupoDiscursao gd1) {
+
+		return aulas;
+	}
+
+
+	public void removerAulaDoGrupoDiscursao(Aula a1, GrupoDiscursao gd1) {
+		this.aulas.remove(0).getIdAula();
 
 	}
 
@@ -169,32 +184,27 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public List<Aula> getListaDeAulas() {
-
-		return aulas;
-	}
-
 	public Aula pesquisaAula(String iDAul) {
-		for(Aula aa : this.aulas){
-			if(aa.getIdAula().equals(iDAul)){
+		for (Aula aa : this.aulas) {
+			if (aa.getIdAula().equals(iDAul)) {
 				return aa;
 			}
 		}
 		return null;
 	}
-	
-	
+
 	public void removerAula(String iDAula) {
 		boolean removeu = false;
-		for(Aula a : this.aulas){
-			if(a.getIdAula().equals(iDAula)){
+		for (Aula a : this.aulas) {
+			if (a.getIdAula().equals(iDAula)) {
 				this.aulas.remove(a);
 				removeu = true;
 				break;
 			}
 		}
-		if(!removeu){
+		if (!removeu) {
 			throw new RuntimeException("ERRO!");
 		}
 	}
+
 }
