@@ -41,6 +41,22 @@ public class TestMainProject {
 		gestor.removeTutorPeloId("12345");
 	}
 
+	@Test(expected = ExcecaoTutorDuplicado.class)
+	public void cadastroDoMesmoTutorTest() throws Exception {
+		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
+		Tutor tu2 = new Tutor("Otaciso", "123.456.789.01");
+		gestor.cadastraTutor(tu1);
+		gestor.cadastraTutor(tu2);
+	}
+
+	@Test(expected = ExcecaoTutorDuplicado.class)
+	public void cadastrarTutorComMesmaMatriculaTest() throws Exception {
+		Tutor t1 = new Tutor("Otaciso", "123.456.789.01");
+		Tutor t2 = new Tutor("Otaciso", "123.456.789.01");
+		gestor.cadastraTutor(t1);
+		gestor.cadastraTutor(t2);
+	}
+
 	// Aluno
 	@Test
 	public void cadastraAlunoNoGestorTest() throws Exception {
@@ -80,5 +96,15 @@ public class TestMainProject {
 		gestor.cadastrarAluno(aluno1);
 		gestor.cadastrarAluno(aluno2);
 	}
+	
+	@Test(expected = ExcecaoAlunoDuplicado.class)
+	public void cadastroDeAlunoMesmaMatriculaTest(){
+		Aluno al1= new Aluno("Otaciso","81011055");
+		Aluno al2= new Aluno("Daniel","81011055");
+		gestor.cadastrarAluno(al1);
+		gestor.cadastrarAluno(al2);
+	}
+	
+
 
 }

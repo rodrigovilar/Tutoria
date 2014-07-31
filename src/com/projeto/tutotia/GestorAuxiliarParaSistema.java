@@ -16,7 +16,8 @@ public class GestorAuxiliarParaSistema {
 		for (Tutor tut1 : this.tutores) {
 			if (tut1.getMatricula().equals(tut.getMatricula())) {
 				existe = true;
-				break;
+				throw new ExcecaoTutorDuplicado();
+				//break;
 			}
 		}
 		if (existe == false) {
@@ -66,6 +67,7 @@ public class GestorAuxiliarParaSistema {
 				existe = true;
 				// Verificar com professor
 				throw new ExcecaoAlunoDuplicado();
+				
 				// break;
 			}
 		}
