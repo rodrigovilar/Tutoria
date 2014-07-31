@@ -29,6 +29,14 @@ public class TestMainProject {
 		assertEquals(1, listTut.size());
 	}
 
+	/*@Before
+	private Tutor loginNoMoodle() {
+		Tutor t1 = new Tutor("", "");
+		t1.setNome("Antônio");
+		t1.setSenha("81011054");
+		return t1;
+	}*/
+
 	@Test
 	public void pesquisarTutorPeloIdTest() throws Exception {
 		Tutor t = new Tutor("Otaciso", "12345");
@@ -210,9 +218,9 @@ public class TestMainProject {
 		List<Aula> listTarefa = gestor.getListaDeAulasCadastradas();
 		assertEquals(4, listTarefa.size());
 	}
-	
+
 	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void verificarListadeAlunosCadastradosTest(){
+	public void verificarListadeAlunosCadastradosTest() {
 		Aluno aI = new Aluno("Mateus", "11111");
 		Aluno aII = new Aluno("Kaué", "22222");
 		Aluno aIII = new Aluno("Otaciso", "333333");
@@ -224,10 +232,11 @@ public class TestMainProject {
 		gestor.cadastrarAluno(aIV);
 		gestor.cadastrarAluno(aV);
 		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
-		assertEquals(2,alunoCadastrados.size());	
+		assertEquals(2, alunoCadastrados.size());
 	}
-	
-	public void removerAulaDoGrupoDiscursaoTest() throws GrupoJaexisteException, GrupoInexistenteException{
+
+	public void removerAulaDoGrupoDiscursaoTest()
+			throws GrupoJaexisteException, GrupoInexistenteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(a);
 		GrupoDiscursao gd = new GrupoDiscursao("0000-1");
@@ -238,6 +247,27 @@ public class TestMainProject {
 		gestor.removerAulaDoGrupoDiscursao(a1, gd1);
 		List<Aula> aulas = gestor.getListaDeAulasCadastradas(gd1);
 		assertEquals(0, aulas.size());
+	}
+
+	@Test(expected = ExcecaoAlunoDuplicado.class)
+	public void removerTodosAlunosCadastradosTest() {
+		Aluno aI = new Aluno(" OtacisoEu ", " 813011053 ");
+		Aluno aII = new Aluno(" OtacisoTu ", " 813011054 ");
+		Aluno aIII = new Aluno(" OtacisoNos ", " 813011055 ");
+		Aluno aIV = new Aluno(" OtacisoVois ", " 813011056 ");
+		Aluno aV = new Aluno(" OtacisoEles ", " 813011057 ");
+		gestor.cadastrarAluno(aI);
+		gestor.cadastrarAluno(aII);
+		gestor.cadastrarAluno(aIII);
+		gestor.cadastrarAluno(aIV);
+		gestor.cadastrarAluno(aV);
+		gestor.removerAlunoPelaMatricula(aI.getMatricula());
+		gestor.removerAlunoPelaMatricula(aII.getMatricula());
+		gestor.removerAlunoPelaMatricula(aIII.getMatricula());
+		gestor.removerAlunoPelaMatricula(aIV.getMatricula());
+		gestor.removerAlunoPelaMatricula(aV.getMatricula());
+		List<Aluno> alunosCadastrados = gestor.getListaDeAlunosCadastrados();
+		assertEquals(5, alunosCadastrados.size());
 	}
 
 }
