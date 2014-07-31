@@ -17,7 +17,7 @@ public class GestorAuxiliarParaSistema {
 			if (tut1.getMatricula().equals(tut.getMatricula())) {
 				existe = true;
 				throw new ExcecaoTutorDuplicado();
-				//break;
+				// break;
 			}
 		}
 		if (existe == false) {
@@ -67,7 +67,7 @@ public class GestorAuxiliarParaSistema {
 				existe = true;
 				// Verificar com professor
 				throw new ExcecaoAlunoDuplicado();
-				
+
 				// break;
 			}
 		}
@@ -119,4 +119,6 @@ public class GestorAuxiliarParaSistema {
 		}
 
 	}
+
+
 }

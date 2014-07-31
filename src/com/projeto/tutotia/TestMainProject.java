@@ -12,6 +12,7 @@ public class TestMainProject {
 
 	private GestorAuxiliarParaSistema gestor;
 
+
 	@Before
 	public void iniciarTest() {
 		this.gestor = new GestorAuxiliarParaSistema();
@@ -21,7 +22,7 @@ public class TestMainProject {
 	// Tutor
 	@Test
 	public void cadastrarTutorNoSistemaTest() throws Exception {
-		Tutor tut = new Tutor("Otaciso", "123.456.789.01");
+		Tutor tut = new Tutor("Otaciso", "12345");
 		gestor.cadastraTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutor();
 		assertEquals(1, listTut.size());
@@ -29,9 +30,9 @@ public class TestMainProject {
 
 	@Test
 	public void pesquisarTutorPeloIdTest() throws Exception {
-		Tutor t = new Tutor("Otaciso", "123.456.789.01");
+		Tutor t = new Tutor("Otaciso", "12345");
 		gestor.cadastraTutor(t);
-		assertEquals(t, gestor.pesquisarTutorPeloId("123.456.789.01"));
+		assertEquals(t, gestor.pesquisarTutorPeloId("12345"));
 	}
 
 	@Test
@@ -42,7 +43,7 @@ public class TestMainProject {
 	}
 
 	@Test(expected = ExcecaoTutorDuplicado.class)
-	public void cadastroDoMesmoTutorTest() throws Exception {
+	public void cadastrarMesmoTutorDuasVezes() throws Exception {
 		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
 		Tutor tu2 = new Tutor("Otaciso", "123.456.789.01");
 		gestor.cadastraTutor(tu1);
@@ -51,11 +52,25 @@ public class TestMainProject {
 
 	@Test(expected = ExcecaoTutorDuplicado.class)
 	public void cadastrarTutorComMesmaMatriculaTest() throws Exception {
-		Tutor t1 = new Tutor("Otaciso", "123.456.789.01");
-		Tutor t2 = new Tutor("Otaciso", "123.456.789.01");
+		Tutor t1 = new Tutor("Otaciso", "123.456");
+		Tutor t2 = new Tutor("Daniel", "123.456");
 		gestor.cadastraTutor(t1);
 		gestor.cadastraTutor(t2);
 	}
+	
+/*	@Test//(expected = ObjetoInexistenteException.class)
+	public void removerTutorInexistente() throws Exception {
+		GestorAuxiliarParaSistema g1= new GestorAuxiliarParaSistema();
+		gestor.cadastraTutor(tut);
+		Tutor novoJogo = new Tutor();
+		Professor p2 = instanciarObjetoProfessor();
+		p2.setNome("Joao");
+		p2.setSenha("01013456");
+		novoJogo.removerProfessor(p2);
+	}
+	*/
+
+
 
 	// Aluno
 	@Test
@@ -96,15 +111,20 @@ public class TestMainProject {
 		gestor.cadastrarAluno(aluno1);
 		gestor.cadastrarAluno(aluno2);
 	}
-	
+
 	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void cadastroDeAlunoMesmaMatriculaTest(){
-		Aluno al1= new Aluno("Otaciso","81011055");
-		Aluno al2= new Aluno("Daniel","81011055");
+	public void cadastroDeAlunoMesmaMatriculaTest() {
+		Aluno al1 = new Aluno("Otaciso", "81011055");
+		Aluno al2 = new Aluno("Daniel", "81011055");
 		gestor.cadastrarAluno(al1);
 		gestor.cadastrarAluno(al2);
 	}
 	
-
+	@Test(expected = AlunoInexistenteException.class)
+	public void removerAlunoInexistenteTest(){
+		Aluno aluno = new Aluno ("Thiego", "12345");
+		gestor.cadastrarAluno(aluno);
+		gestor.removerAlunoPelaMatricula("54321");
+	}
 
 }
