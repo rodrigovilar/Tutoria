@@ -25,7 +25,7 @@ public class GrupoDiscursao {
 
 	}
 
-	public void addTarefa(Aula aula) {
+	public void addAula(Aula aula) {
 		this.aulas.add(aula);
 
 	}
@@ -48,7 +48,7 @@ public class GrupoDiscursao {
 		return this.alunosParticipantes;
 	}
 
-	public List<Aula> listTarefas() {
+	public List<Aula> listAulas() {
 		return this.aulas;
 	}
 
@@ -76,4 +76,6 @@ public class GrupoDiscursao {
 				+ ", alunosParticipantes=" + alunosParticipantes + "]";
 	}
 
+
+	
 }

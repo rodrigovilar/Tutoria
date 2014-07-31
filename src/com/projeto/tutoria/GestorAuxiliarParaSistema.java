@@ -7,8 +7,8 @@ public class GestorAuxiliarParaSistema {
 	private List<Tutor> tutores = new LinkedList<Tutor>();
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
-	private List<GrupoDiscursao> grupos= new LinkedList<GrupoDiscursao>();
-	
+	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
+
 	public boolean finalizou() {
 		return false;
 	}
@@ -132,32 +132,43 @@ public class GestorAuxiliarParaSistema {
 		this.aulas.add(aula);
 
 	}
-	
-	public void cadastrarGrupoDiscursao(GrupoDiscursao grupod) throws GrupoJaexisteException{
+
+	public void cadastrarGrupoDiscursao(GrupoDiscursao grupod)
+			throws GrupoJaexisteException {
 		boolean existe = false;
 
-		for(GrupoDiscursao g: this.grupos){
-			if(g.getiDGrupo().equals(grupod.getiDGrupo())){
+		for (GrupoDiscursao g : this.grupos) {
+			if (g.getiDGrupo().equals(grupod.getiDGrupo())) {
 				throw new GrupoDiscursaoJaexisteException();
-				//existe = true;
+				// existe = true;
 			}
 		}
-		if(!existe){
+		if (!existe) {
 			this.grupos.add(grupod);
-		}
-		else{
+		} else {
 			throw new GrupoJaexisteException("Erro de iD");
 		}
 	}
 
-	public GrupoDiscursao pesquisarGrupo(String iDcodigo) throws GrupoInexistenteException{
-		for(GrupoDiscursao g: this.grupos){
-			if(g.getiDGrupo().equals(iDcodigo)){
+	public GrupoDiscursao pesquisarGrupo(String iDcodigo)
+			throws GrupoInexistenteException {
+		for (GrupoDiscursao g : this.grupos) {
+			if (g.getiDGrupo().equals(iDcodigo)) {
 				return g;
 			}
 		}
-		throw new GrupoInexistenteException ("Grupo Inexistente!");
-		
+		throw new GrupoInexistenteException("Grupo Inexistente!");
+
+	}
+
+	public void adicionarAulaAoGrupo(Aula aula, GrupoDiscursao gd) {
+		gd.addAula(aula);
+
+	}
+
+	public List<Aula> getListaDeAulas() {
+
+		return aulas;
 	}
 
 }

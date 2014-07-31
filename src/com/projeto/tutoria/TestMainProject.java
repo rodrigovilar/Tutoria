@@ -138,26 +138,38 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void cadastrarGrupoTest() throws GrupoJaexisteException, GrupoInexistenteException {
+	public void cadastrarGrupoTest() throws GrupoJaexisteException,
+			GrupoInexistenteException {
 		Aula aula = new Aula("Aula de Login do Tablet", "01");
 		gestor.cadastrarAula(aula);
 		GrupoDiscursao grupo = new GrupoDiscursao(aula, "A-01");
 		gestor.cadastrarGrupoDiscursao(grupo);
 		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
 	}
-	
+
 	@Test(expected = GrupoDiscursaoJaexisteException.class)
 	public void cadastraGrupoDiscursaoComMesmoCodigoTest()
 			throws GrupoJaexisteException {
-		Aula aula = new Aula("Acessar a plataforma EAD pelo tablet","02");
+		Aula aula = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestor.cadastrarAula(aula);
-		GrupoDiscursao grupod = new GrupoDiscursao(aula,"A-02");
+		GrupoDiscursao grupod = new GrupoDiscursao(aula, "A-02");
 		gestor.cadastrarGrupoDiscursao(grupod);
-		Aula aulaII = new Aula("Enviar Exercio ao Modle","03");
+		Aula aulaII = new Aula("Enviar Exercio ao Modle", "03");
 		gestor.cadastrarAula(aulaII);
-		GrupoDiscursao grupod2 = new GrupoDiscursao(aula,"A-02");
+		GrupoDiscursao grupod2 = new GrupoDiscursao(aula, "A-02");
 		gestor.cadastrarGrupoDiscursao(grupod2);
 	}
-	
+
+	@Test
+	public void adicionarAulasAoGrupoDiscursaoTest()
+			throws GrupoJaexisteException {
+		Aula a = new Aula("Enviar Exercio ao Modle", "03");
+		gestor.cadastrarAula(a);
+		GrupoDiscursao gd = new GrupoDiscursao(a, "A-03");
+		gestor.cadastrarGrupoDiscursao(gd);
+		gestor.adicionarAulaAoGrupo(a, gd);
+		List<Aula> aulas = gestor.getListaDeAulas();
+		assertEquals(1, aulas.size());
+	}
 
 }
