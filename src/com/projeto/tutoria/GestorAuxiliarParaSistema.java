@@ -171,4 +171,13 @@ public class GestorAuxiliarParaSistema {
 		return aulas;
 	}
 
+	public Aula pesquisaAula(String iDAul) {
+		for(Aula aa : this.aulas){
+			if(aa.getIdAula().equals(iDAul)){
+				return aa;
+			}
+		}
+		return null;
+	}
+
 }

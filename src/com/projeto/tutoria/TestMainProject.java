@@ -1,7 +1,6 @@
 package com.projeto.tutoria;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -177,6 +176,22 @@ public class TestMainProject {
 		gestor.adicionarAulaAoGrupo(a, gd);
 		List<Aula> aulas = gestor.getListaDeAulas();
 		assertEquals(1, aulas.size());
+	}
+	
+	@Test
+	public void pesquisarAulaTest(){
+		Aula aula = new Aula("Enviar Exercio ao Modle", "05");
+		gestor.cadastrarAula(aula);
+		Aula aulap = gestor.pesquisaAula("05");
+		assertEquals(aula,aulap);	
+	}
+	
+	@Test
+	public void pesquisarAulaInexistenteTest() {
+		Aula a = new Aula("Enviar Exercio ao Modle", "05");
+		gestor.cadastrarAula(a);
+		Aula aula = gestor.pesquisaAula("-1");
+		assertNull(aula);
 	}
 
 }

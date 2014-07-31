@@ -2,12 +2,13 @@ package com.projeto.tutoria;
 
 public class Aula {
 	private String descrição;
-	private String IdDevere;
+	private String IdAula;
+	
 
 	public Aula(String descrição, String idDevere) {
 		super();
 		this.descrição = descrição;
-		IdDevere = idDevere;
+		IdAula = idDevere;
 	}
 
 	public String getDescrição() {
@@ -18,12 +19,12 @@ public class Aula {
 		this.descrição = descrição;
 	}
 
-	public String getIdDevere() {
-		return IdDevere;
+	public String getIdAula() {
+		return IdAula;
 	}
 
 	public void setIdDevere(String idDevere) {
-		IdDevere = idDevere;
+		IdAula = idDevere;
 	}
 
 }
