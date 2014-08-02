@@ -21,7 +21,7 @@ public class TestMainProject {
 	public void cadastrarTutorNoSistemaTest() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
 		gestor.cadastraTutor(tut);
-		List<Tutor> listTut = gestor.getListaDeTutor();
+		List<Tutor> listTut = gestor.getListaDeTutores();
 		assertEquals(1, listTut.size());
 	}
 
@@ -117,13 +117,6 @@ public class TestMainProject {
 		assertEquals(aluno1, gestor.pesquisarAlunoPelaMatricula("81011053"));
 	}
 
-	@Test
-	public void removerAlunoPelaMatriculaTest() throws Exception {
-		Aluno aluno = new Aluno("Otaciso", "81011053");
-		gestor.cadastrarAluno(aluno);
-		gestor.pesquisarAlunoPelaMatricula("81011053");
-	}
-
 	@Test(expected = ExcecaoAlunoDuplicado.class)
 	public void cadastroDoMesmoAlunoTest() {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
@@ -181,7 +174,7 @@ public class TestMainProject {
 		gestor.cadastrarAluno(aIV);
 		gestor.cadastrarAluno(aV);
 		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
-		assertEquals(2, alunoCadastrados.size());
+		assertEquals(5, alunoCadastrados.size());
 	}
 
 	// Grupo
@@ -236,9 +229,13 @@ public class TestMainProject {
 		gestor.cadastrarAula(aIII);
 		GrupoDiscursao grupoD_III = new GrupoDiscursao(aIII, "Grupo III");
 		gestor.cadastrarGrupoDiscursao(grupoD_III);
+		Aula aIV = new Aula("Acessar aulas no moodle", "04");
+		gestor.cadastrarAula(aIV);
+		GrupoDiscursao grupoD_IV = new GrupoDiscursao(aIV, "Grupo IV");
+		gestor.cadastrarGrupoDiscursao(grupoD_IV);
 		List<GrupoDiscursao> qtdGrupoCadastrados = gestor
 				.getListaDeGruposNoForum();
-		assertEquals(3, qtdGrupoCadastrados.size());
+		assertEquals(4, qtdGrupoCadastrados.size());
 	}
 
 	// Aula
@@ -289,6 +286,24 @@ public class TestMainProject {
 		List<Aula> aulas = gestor.getListaDeAulasCadastradas(gd1);
 		assertEquals(0, aulas.size());
 	}
+
+	@Test
+	public void removerArquivosTest() {
+		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
+				"MEC-19823-01");
+		gestor.cadastrarArquivos(aq);
+		gestor.removerArquivo("MEC-19823-01");
+		List<Arquivo> lista = gestor.getListaDeArquivos();
+		assertEquals(1, lista.size());
+	}
+
+/*	@Test(expected = ArquivoInexistenteException.class)
+	public void removerArquivoInexistenteTest() {
+		gestor.removerArquivo("0123");
+	}*/
+
+	// @Test
+	// public void removerMaterialTest(){
 
 }
 // tagXIV

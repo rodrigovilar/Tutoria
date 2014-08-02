@@ -8,7 +8,10 @@ public class GestorAuxiliarParaSistema {
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
-
+	//private List<GestorAuxiliarParaSistema> gestor = new LinkedList<GestorAuxiliarParaSistema>();
+	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
+	
+	
 	public boolean finalizou() {
 		return false;
 	}
@@ -115,17 +118,17 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public List<Tutor> getListaDeTutor() {
+/*	public List<Tutor> getListaDeTutor() {
 
 		return this.tutores;
-	}
+	}*/
 
 	public List<Aluno> getListaDeAlunosCadastrados() {
 
 		return alunos;
 	}
-	
-	public List<GrupoDiscursao> getListaDeGruposNoForum(){
+
+	public List<GrupoDiscursao> getListaDeGruposNoForum() {
 		return this.grupos;
 	}
 
@@ -144,11 +147,20 @@ public class GestorAuxiliarParaSistema {
 		return aulas;
 	}
 	
+	public void cadastrarArquivos(Arquivo arquivo) {
+		this.arquivos.add(arquivo);
+
+	}
+
 	public List<Aula> getListaDeAulasCadastradas(GrupoDiscursao gd1) {
 
 		return aulas;
 	}
-
+	
+	public List<Arquivo> getListaDeArquivos() {
+		
+		return arquivos;
+	}
 
 	public void removerAulaDoGrupoDiscursao(Aula a1, GrupoDiscursao gd1) {
 		this.aulas.remove(0).getIdAula();
@@ -210,5 +222,24 @@ public class GestorAuxiliarParaSistema {
 			throw new RuntimeException("ERRO!");
 		}
 	}
+
+	public void removerArquivo(String iDArquivo) {
+			boolean removeu = false;
+			for(Arquivo a : this.arquivos){
+				if(a.getIdArquivo().equals(iDArquivo)){
+					this.aulas.remove(a);
+					removeu = true;
+					break;
+				}
+			}
+			if(!removeu){
+				throw new RuntimeException("ERRO!");
+			}
+
+		}
+		
+	
+
+	
 
 }

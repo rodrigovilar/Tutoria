@@ -1,17 +1,13 @@
 package com.projeto.tutoria;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class CadastrosEGerenciaDosArquivosELivros {
-	private List<Arquivos> arquivos = new LinkedList<Arquivos>();
 	private GestorAuxiliarParaSistema gestorAux = new GestorAuxiliarParaSistema();
 	
 	
 	
-	public void cadastrarArquivo(Arquivos arquivo){
-		this.arquivos.add(arquivo);
-	}
+	
 	
 	public void removerAulaDoGrupoDiscursao(Aula a, GrupoDiscursao gd){
 		this.gestorAux.removerAulaDoGrupoDiscursao(a, gd);
@@ -24,5 +20,13 @@ public class CadastrosEGerenciaDosArquivosELivros {
 	public List<GrupoDiscursao> getListaDeGruposNoForum(){
 		return this.gestorAux.getListaDeGruposNoForum();
 	}
-
+	/*
+	public List <Arquivo> getArquivos (){
+		return this.gestorAux.getListaDeMateriais();
+	}
+	
+	public void removerArquivos(String IdArquivo){
+		this.gestorAux.r
+	}
+*/
 }
