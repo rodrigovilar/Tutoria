@@ -20,5 +20,9 @@ public class CadastrosEGerenciaDosArquivosELivros {
 	public List<Aula> getListaDeAulasCadastradas() {
 		return this.gestorAux.getListaDeAulasCadastradas();
 	}
+	
+	public List<GrupoDiscursao> getListaDeGruposNoForum(){
+		return this.gestorAux.getListaDeGruposNoForum();
+	}
 
 }

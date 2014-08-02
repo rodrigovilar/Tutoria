@@ -124,6 +124,10 @@ public class GestorAuxiliarParaSistema {
 
 		return alunos;
 	}
+	
+	public List<GrupoDiscursao> getListaDeGruposNoForum(){
+		return this.grupos;
+	}
 
 	public List<Tutor> getListaDeTutores() {
 

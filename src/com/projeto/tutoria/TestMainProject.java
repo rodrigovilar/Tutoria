@@ -1,7 +1,9 @@
 package com.projeto.tutoria;
 
 import static org.junit.Assert.*;
+
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -145,6 +147,45 @@ public class TestMainProject {
 		gestor.removerAlunoPelaMatricula("54321");
 	}
 
+	@Test(expected = ExcecaoAlunoDuplicado.class)
+	public void removerTodosAlunosCadastradosTest() {
+		Aluno aI = new Aluno(" OtacisoEu ", " 813011053 ");
+		Aluno aII = new Aluno(" OtacisoTu ", " 813011054 ");
+		Aluno aIII = new Aluno(" OtacisoNos ", " 813011055 ");
+		Aluno aIV = new Aluno(" OtacisoVois ", " 813011056 ");
+		Aluno aV = new Aluno(" OtacisoEles ", " 813011057 ");
+		gestor.cadastrarAluno(aI);
+		gestor.cadastrarAluno(aII);
+		gestor.cadastrarAluno(aIII);
+		gestor.cadastrarAluno(aIV);
+		gestor.cadastrarAluno(aV);
+		gestor.removerAlunoPelaMatricula(aI.getMatricula());
+		gestor.removerAlunoPelaMatricula(aII.getMatricula());
+		gestor.removerAlunoPelaMatricula(aIII.getMatricula());
+		gestor.removerAlunoPelaMatricula(aIV.getMatricula());
+		gestor.removerAlunoPelaMatricula(aV.getMatricula());
+		List<Aluno> alunosCadastrados = gestor.getListaDeAlunosCadastrados();
+		assertEquals(5, alunosCadastrados.size());
+	}
+
+	@Test(expected = ExcecaoAlunoDuplicado.class)
+	public void verificarListadeAlunosCadastradosTest() {
+		Aluno aI = new Aluno("Mateus", "11111");
+		Aluno aII = new Aluno("Kaué", "22222");
+		Aluno aIII = new Aluno("Otaciso", "333333");
+		Aluno aIV = new Aluno("Thiego", "444444");
+		Aluno aV = new Aluno("Daniel", "555555");
+		gestor.cadastrarAluno(aI);
+		gestor.cadastrarAluno(aII);
+		gestor.cadastrarAluno(aIII);
+		gestor.cadastrarAluno(aIV);
+		gestor.cadastrarAluno(aV);
+		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
+		assertEquals(2, alunoCadastrados.size());
+	}
+
+	// Grupo
+
 	@Test
 	public void cadastrarGrupoTest() throws GrupoJaexisteException,
 			GrupoInexistenteException {
@@ -181,6 +222,28 @@ public class TestMainProject {
 	}
 
 	@Test
+	public void verificarQuantidadeDeGrupoDiscursaoPorAssuntoNoForumTest()
+			throws GrupoJaexisteException {
+		Aula aI = new Aula("Acessar a plataforma EAD pelo tablet", "02");
+		gestor.cadastrarAula(aI);
+		GrupoDiscursao grupoD_I = new GrupoDiscursao(aI, "Grupo I");
+		gestor.cadastrarGrupoDiscursao(grupoD_I);
+		Aula aII = new Aula("Enviar Exercio ao Modle", "03");
+		gestor.cadastrarAula(aII);
+		GrupoDiscursao grupoD_II = new GrupoDiscursao(aII, "Grupo II");
+		gestor.cadastrarGrupoDiscursao(grupoD_II);
+		Aula aIII = new Aula("Aula de Login do Tablet", "01");
+		gestor.cadastrarAula(aIII);
+		GrupoDiscursao grupoD_III = new GrupoDiscursao(aIII, "Grupo III");
+		gestor.cadastrarGrupoDiscursao(grupoD_III);
+		List<GrupoDiscursao> qtdGrupoCadastrados = gestor
+				.getListaDeGruposNoForum();
+		assertEquals(3, qtdGrupoCadastrados.size());
+	}
+
+	// Aula
+
+	@Test
 	public void pesquisarAulaTest() {
 		Aula aula = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(aula);
@@ -213,22 +276,6 @@ public class TestMainProject {
 		assertEquals(4, listTarefa.size());
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void verificarListadeAlunosCadastradosTest() {
-		Aluno aI = new Aluno("Mateus", "11111");
-		Aluno aII = new Aluno("Kaué", "22222");
-		Aluno aIII = new Aluno("Otaciso", "333333");
-		Aluno aIV = new Aluno("Thiego", "444444");
-		Aluno aV = new Aluno("Daniel", "555555");
-		gestor.cadastrarAluno(aI);
-		gestor.cadastrarAluno(aII);
-		gestor.cadastrarAluno(aIII);
-		gestor.cadastrarAluno(aIV);
-		gestor.cadastrarAluno(aV);
-		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
-		assertEquals(2, alunoCadastrados.size());
-	}
-
 	public void removerAulaDoGrupoDiscursaoTest()
 			throws GrupoJaexisteException, GrupoInexistenteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
@@ -243,26 +290,5 @@ public class TestMainProject {
 		assertEquals(0, aulas.size());
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void removerTodosAlunosCadastradosTest() {
-		Aluno aI = new Aluno(" OtacisoEu ", " 813011053 ");
-		Aluno aII = new Aluno(" OtacisoTu ", " 813011054 ");
-		Aluno aIII = new Aluno(" OtacisoNos ", " 813011055 ");
-		Aluno aIV = new Aluno(" OtacisoVois ", " 813011056 ");
-		Aluno aV = new Aluno(" OtacisoEles ", " 813011057 ");
-		gestor.cadastrarAluno(aI);
-		gestor.cadastrarAluno(aII);
-		gestor.cadastrarAluno(aIII);
-		gestor.cadastrarAluno(aIV);
-		gestor.cadastrarAluno(aV);
-		gestor.removerAlunoPelaMatricula(aI.getMatricula());
-		gestor.removerAlunoPelaMatricula(aII.getMatricula());
-		gestor.removerAlunoPelaMatricula(aIII.getMatricula());
-		gestor.removerAlunoPelaMatricula(aIV.getMatricula());
-		gestor.removerAlunoPelaMatricula(aV.getMatricula());
-		List<Aluno> alunosCadastrados = gestor.getListaDeAlunosCadastrados();
-		assertEquals(5, alunosCadastrados.size());
-	}
-
 }
-//tagXVII
+// tagXIV
