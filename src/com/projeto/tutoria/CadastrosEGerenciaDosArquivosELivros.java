@@ -17,8 +17,8 @@ public class CadastrosEGerenciaDosArquivosELivros {
 		this.gestorAux.removerAulaDoGrupoDiscursao(a, gd);
 	}
 	
-	public List<Aula> getListaDeAulasCadastradas(GrupoDiscursao gd1) {
-		return this.gestorAux.getListaDeAulasCadastradas(gd1);
+	public List<Aula> getListaDeAulasCadastradas() {
+		return this.gestorAux.getListaDeAulasCadastradas();
 	}
 
 }

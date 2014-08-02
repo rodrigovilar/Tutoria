@@ -1,18 +1,12 @@
 package com.projeto.tutoria;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestMainProject {
-
 	private GestorAuxiliarParaSistema gestor;
-
-	// private PlataformaDeGerenciaEad gestorAux = new
-	// PlataformaDeGerenciaEad();
 
 	@Before
 	public void iniciarTest() {
@@ -29,13 +23,13 @@ public class TestMainProject {
 		assertEquals(1, listTut.size());
 	}
 
-	/*@Before
-	private Tutor loginNoMoodle() {
-		Tutor t1 = new Tutor("", "");
-		t1.setNome("Antônio");
-		t1.setSenha("81011054");
-		return t1;
-	}*/
+	@Test
+	public void loginTutorNoMoodle() {
+		final String loginNumber = ".Login21";
+		LoginTutor LoginTutor = new LoginTutor();
+		boolean login = LoginTutor.ValidaSenha(loginNumber);
+		assertEquals(true, login);
+	}
 
 	@Test
 	public void pesquisarTutorPeloIdTest() throws Exception {
@@ -271,3 +265,4 @@ public class TestMainProject {
 	}
 
 }
+//tagXVII
