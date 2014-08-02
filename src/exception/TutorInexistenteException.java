@@ -1,9 +1,9 @@
-package com.projeto.tutoria;
+package exception;
 
 @SuppressWarnings("serial")
 public class TutorInexistenteException extends RuntimeException {
 
-	TutorInexistenteException(String msn2) {
+	public TutorInexistenteException(String msn2) {
 		super(msn2);
 	}
 

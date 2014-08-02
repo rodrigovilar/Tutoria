@@ -1,4 +1,4 @@
-package com.projeto.tutoria;
+package exception;
 
 @SuppressWarnings("serial")
 public class ArquivoInexistenteException extends RuntimeException {

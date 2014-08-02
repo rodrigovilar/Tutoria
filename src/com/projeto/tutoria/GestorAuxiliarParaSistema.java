@@ -3,13 +3,23 @@ package com.projeto.tutoria;
 import java.util.LinkedList;
 import java.util.List;
 
+import exception.AlunoExistenteException;
+import exception.AlunoInexistenteException;
+import exception.ArquivoInexistenteException;
+import exception.ExcecaoAlunoDuplicado;
+import exception.ExcecaoTutorDuplicado;
+import exception.GrupoDiscursaoJaexisteException;
+import exception.GrupoInexistenteException;
+import exception.GrupoJaexisteException;
+import exception.TutorExistenteException;
+import exception.TutorInexistenteException;
+
 public class GestorAuxiliarParaSistema {
 	private List<Tutor> tutores = new LinkedList<Tutor>();
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
-	// private List<GestorAuxiliarParaSistema> gestor = new
-	// LinkedList<GestorAuxiliarParaSistema>();
+
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
 
 	public boolean finalizou() {
@@ -103,7 +113,6 @@ public class GestorAuxiliarParaSistema {
 	}
 
 	public void removerAlunoPelaMatricula(String matricula) {
-		// TODO Auto-generated method stub
 		boolean removeu = false;
 		for (Aluno a : this.alunos) {
 			if (a.getMatricula().equals(matricula)) {

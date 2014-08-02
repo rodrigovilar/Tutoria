@@ -1,8 +1,8 @@
-package com.projeto.tutoria;
+package exception;
 
 @SuppressWarnings("serial")
 public class AlunoInexistenteException extends RuntimeException {
-	AlunoInexistenteException(String msg){
+	public AlunoInexistenteException(String msg){
 		super(msg);
 	}
 }

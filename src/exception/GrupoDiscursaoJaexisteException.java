@@ -1,4 +1,4 @@
-package com.projeto.tutoria;
+package exception;
 
 @SuppressWarnings("serial")
 public class GrupoDiscursaoJaexisteException extends RuntimeException {

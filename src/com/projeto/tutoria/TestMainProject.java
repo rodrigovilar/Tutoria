@@ -1,12 +1,21 @@
 package com.projeto.tutoria;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import exception.AlunoInexistenteException;
+import exception.ArquivoInexistenteException;
+import exception.ExcecaoAlunoDuplicado;
+import exception.ExcecaoTutorDuplicado;
+import exception.GrupoDiscursaoJaexisteException;
+import exception.GrupoInexistenteException;
+import exception.GrupoJaexisteException;
+import exception.TutorInexistenteException;
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
 
@@ -297,11 +306,6 @@ public class TestMainProject {
 		assertEquals(1, lista.size());
 	}
 
-	@Test(expected = ArquivoInexistenteException.class)
-	public void removerArquivoInexistenteTest() {
-		gestor.removerArquivo("MEC-19823-01 + 2");
-	}
-
 	@Test
 	public void pesquisarArquivosNoForumTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
@@ -309,6 +313,18 @@ public class TestMainProject {
 		gestor.cadastrarArquivos(aq);
 		Arquivo arq = gestor.pesquisarArquivos("MEC-19823-01");
 		assertEquals(aq, arq);
+	}
+
+	@Test(expected = ArquivoInexistenteException.class)
+	public void removerArquivoInexistenteTest() {
+		gestor.removerArquivo("MEC-19823-01 + 2");
+	}
+
+	@Test(expected = ArquivoInexistenteException.class)
+	public void pesquisarArquivosInexistenteNoGrupoTest() {
+		Arquivo aq = new Arquivo(" Notebook.wma ", " MEC-00000-0 ");
+		gestor.cadastrarArquivos(aq);
+		gestor.pesquisarArquivos(" MEC-00000-00000 ");
 	}
 
 }
