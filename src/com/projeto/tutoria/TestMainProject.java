@@ -297,13 +297,19 @@ public class TestMainProject {
 		assertEquals(1, lista.size());
 	}
 
-/*	@Test(expected = ArquivoInexistenteException.class)
+	@Test(expected = ArquivoInexistenteException.class)
 	public void removerArquivoInexistenteTest() {
-		gestor.removerArquivo("0123");
-	}*/
+		gestor.removerArquivo("MEC-19823-01 + 2");
+	}
 
-	// @Test
-	// public void removerMaterialTest(){
+	@Test
+	public void pesquisarArquivosNoForumTest() {
+		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
+				"MEC-19823-01");
+		gestor.cadastrarArquivos(aq);
+		Arquivo arq = gestor.pesquisarArquivos("MEC-19823-01");
+		assertEquals(aq, arq);
+	}
 
 }
 // tagXIV

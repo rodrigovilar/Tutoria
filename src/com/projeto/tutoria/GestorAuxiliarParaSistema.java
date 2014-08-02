@@ -8,10 +8,10 @@ public class GestorAuxiliarParaSistema {
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
-	//private List<GestorAuxiliarParaSistema> gestor = new LinkedList<GestorAuxiliarParaSistema>();
+	// private List<GestorAuxiliarParaSistema> gestor = new
+	// LinkedList<GestorAuxiliarParaSistema>();
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
-	
-	
+
 	public boolean finalizou() {
 		return false;
 	}
@@ -92,7 +92,7 @@ public class GestorAuxiliarParaSistema {
 		throw new AlunoInexistenteException("Aluno Inexistente");
 	}
 
-	public Object pesquisarAlunoPelaMatricula(String matricula)
+	public Aluno pesquisarAlunoPelaMatricula(String matricula)
 			throws AlunoInexistenteException {
 		for (Aluno aluno1 : this.alunos) {
 			if (aluno1.getMatricula().equals(matricula)) {
@@ -118,11 +118,6 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-/*	public List<Tutor> getListaDeTutor() {
-
-		return this.tutores;
-	}*/
-
 	public List<Aluno> getListaDeAlunosCadastrados() {
 
 		return alunos;
@@ -146,7 +141,7 @@ public class GestorAuxiliarParaSistema {
 
 		return aulas;
 	}
-	
+
 	public void cadastrarArquivos(Arquivo arquivo) {
 		this.arquivos.add(arquivo);
 
@@ -156,9 +151,9 @@ public class GestorAuxiliarParaSistema {
 
 		return aulas;
 	}
-	
+
 	public List<Arquivo> getListaDeArquivos() {
-		
+
 		return arquivos;
 	}
 
@@ -223,23 +218,30 @@ public class GestorAuxiliarParaSistema {
 		}
 	}
 
-	public void removerArquivo(String iDArquivo) {
-			boolean removeu = false;
-			for(Arquivo a : this.arquivos){
-				if(a.getIdArquivo().equals(iDArquivo)){
-					this.aulas.remove(a);
-					removeu = true;
-					break;
-				}
+	public void removerArquivo(String iDArquivo)
+			throws ArquivoInexistenteException {
+		boolean removeu = false;
+		for (Arquivo a : this.arquivos) {
+			if (a.getIdArquivo().equals(iDArquivo)) {
+				this.aulas.remove(a);
+				removeu = true;
+				break;
 			}
-			if(!removeu){
-				throw new RuntimeException("ERRO!");
-			}
-
 		}
-		
-	
+		if (!removeu) {
+			throw new ArquivoInexistenteException("");
+		}
 
-	
+	}
+
+	public Arquivo pesquisarArquivos(String iDArquivo)
+			throws ArquivoInexistenteException {
+		for (Arquivo arquivo : this.arquivos) {
+			if (arquivo.getIdArquivo().equals(iDArquivo)) {
+				return arquivo;
+			}
+		}
+		throw new ArquivoInexistenteException("iDArquivo Inexistente");
+	}
 
 }
