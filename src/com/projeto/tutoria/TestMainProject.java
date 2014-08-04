@@ -1,21 +1,12 @@
 package com.projeto.tutoria;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import java.util.*;
+import org.junit.*;
+import exception.*;
+import arquivos.*;
 
-import exception.AlunoInexistenteException;
-import exception.ArquivoInexistenteException;
-import exception.ExcecaoAlunoDuplicado;
-import exception.ExcecaoTutorDuplicado;
-import exception.GrupoDiscursaoJaexisteException;
-import exception.GrupoInexistenteException;
-import exception.GrupoJaexisteException;
-import exception.TutorInexistenteException;
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
 

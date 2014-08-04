@@ -1,42 +1,33 @@
 package com.projeto.tutoria;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import exception.AlunoExistenteException;
-import exception.AlunoInexistenteException;
-import exception.ArquivoInexistenteException;
-import exception.ExcecaoAlunoDuplicado;
-import exception.ExcecaoTutorDuplicado;
-import exception.GrupoDiscursaoJaexisteException;
-import exception.GrupoInexistenteException;
-import exception.GrupoJaexisteException;
-import exception.TutorExistenteException;
-import exception.TutorInexistenteException;
+
+import exception.*;
+import arquivos.*;
 
 public class GestorAuxiliarParaSistema {
+
 	private List<Tutor> tutores = new LinkedList<Tutor>();
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
-
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
 
 	public boolean finalizou() {
 		return false;
 	}
 
-	public void cadastraTutor(Tutor tut) throws Exception {
+	public void cadastraTutor(Tutor tutorNovo) throws Exception {
 		boolean existe = false;
-		for (Tutor tut1 : this.tutores) {
-			if (tut1.getMatricula().equals(tut.getMatricula())) {
+		for (Tutor tutorAntigo : this.tutores) {
+			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())) {
 				existe = true;
 				throw new ExcecaoTutorDuplicado();
-				// break;
 			}
 		}
 		if (existe == false) {
-			this.tutores.add(tut);
+			this.tutores.add(tutorNovo);
 		} else {
 			throw new TutorExistenteException("Tutor Existente");
 		}
@@ -61,31 +52,25 @@ public class GestorAuxiliarParaSistema {
 				break;
 			}
 		}
+
 		if (removeu == false) {
 			throw new TutorInexistenteException("Tutor não existe!");
 		}
-
 	}
 
 	// Aluno
 
 	public void cadastrarAluno(Aluno alunos) {
 		boolean existe = false;
-
 		for (Aluno aluno : this.alunos) {
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
-
 				existe = true;
-				// Verificar com professor
 				throw new ExcecaoAlunoDuplicado();
-
-				// break;
 			}
 		}
+
 		if (existe == false) {
-
 			this.alunos.add(alunos);
-
 		} else {
 			throw new AlunoExistenteException("Aluno Existente!");
 		}// throw new ExcecaoAlunoDuplicado();
