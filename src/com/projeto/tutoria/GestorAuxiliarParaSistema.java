@@ -2,7 +2,6 @@ package com.projeto.tutoria;
 
 import java.util.*;
 
-
 import exception.*;
 import arquivos.*;
 
@@ -226,6 +225,15 @@ public class GestorAuxiliarParaSistema {
 			throw new ArquivoInexistenteException("");
 		}
 
+	}
+
+	public Arquivo removerArquivoPeloNome(String nome) {
+		for (Arquivo a : this.arquivos) {
+			if (a.getNome().equals(nome)) {
+				return a;
+			}
+		}
+		throw new ArquivoInexistenteException("Arquivo Nao Existe");
 	}
 
 	public Arquivo pesquisarArquivos(String iDArquivo)

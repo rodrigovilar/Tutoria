@@ -1,11 +1,28 @@
 package com.projeto.tutoria;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
-import java.util.*;
-import org.junit.*;
-import exception.*;
-import arquivos.*;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import arquivos.Aluno;
+import arquivos.Arquivo;
+import arquivos.Aula;
+import arquivos.GrupoDiscursao;
+import arquivos.LoginTutor;
+import arquivos.Tutor;
+import exception.AlunoInexistenteException;
+import exception.ArquivoInexistenteException;
+import exception.ExcecaoAlunoDuplicado;
+import exception.ExcecaoTutorDuplicado;
+import exception.GrupoDiscursaoJaexisteException;
+import exception.GrupoInexistenteException;
+import exception.GrupoJaexisteException;
+import exception.TutorInexistenteException;
 
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
@@ -316,6 +333,15 @@ public class TestMainProject {
 		Arquivo aq = new Arquivo(" Notebook.wma ", " MEC-00000-0 ");
 		gestor.cadastrarArquivos(aq);
 		gestor.pesquisarArquivos(" MEC-00000-00000 ");
+	}
+
+	@Test
+	public void pesquisarArquivoCadastradoPeloNomeNoGrupo()
+			throws ArquivoInexistenteException {
+		Arquivo a = new Arquivo("Tablets Nas Escolas.pdf", "MEC-0988776-01");
+		gestor.cadastrarArquivos(a);
+		assertEquals(a,
+				gestor.removerArquivoPeloNome("Tablets Nas Escolas.pdf"));
 	}
 
 }
