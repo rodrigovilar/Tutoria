@@ -3,8 +3,10 @@ package com.projeto.tutoria;
 import java.util.LinkedList;
 import java.util.List;
 
-import arquivos.*;
-import exception.*;
+import com.projeto.arquivos.Tutor;
+import com.projeto.exception.ExcecaoTutorDuplicado;
+import com.projeto.exception.TutorExistenteException;
+import com.projeto.exception.TutorInexistenteException;
 
 public class CadastrarERemover {
 	

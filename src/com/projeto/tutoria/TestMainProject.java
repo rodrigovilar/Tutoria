@@ -1,28 +1,13 @@
 package com.projeto.tutoria;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import arquivos.Aluno;
-import arquivos.Arquivo;
-import arquivos.Aula;
-import arquivos.GrupoDiscursao;
-import arquivos.LoginTutor;
-import arquivos.Tutor;
-import exception.AlunoInexistenteException;
-import exception.ArquivoInexistenteException;
-import exception.ExcecaoAlunoDuplicado;
-import exception.ExcecaoTutorDuplicado;
-import exception.GrupoDiscursaoJaexisteException;
-import exception.GrupoInexistenteException;
-import exception.GrupoJaexisteException;
-import exception.TutorInexistenteException;
+import com.projeto.arquivos.*;
+import com.projeto.exception.*;
 
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
@@ -67,7 +52,7 @@ public class TestMainProject {
 	@Test(expected = ExcecaoTutorDuplicado.class)
 	public void cadastrarMesmoTutorDuasVezes() throws Exception {
 		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
-		Tutor tu2 = new Tutor("Otaciso", "123.456.789.01");
+		Tutor tu2 = new Tutor("Otaciso", "123.456.789");
 		gestor.cadastraTutor(tu1);
 		gestor.cadastraTutor(tu2);
 	}

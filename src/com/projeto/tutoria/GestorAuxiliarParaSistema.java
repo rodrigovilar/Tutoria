@@ -1,18 +1,37 @@
 package com.projeto.tutoria;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import exception.*;
-import arquivos.*;
+import com.projeto.arquivos.Aluno;
+import com.projeto.arquivos.Arquivo;
+import com.projeto.arquivos.Aula;
+import com.projeto.arquivos.GrupoDiscursao;
+import com.projeto.arquivos.Tutor;
+import com.projeto.exception.AlunoExistenteException;
+import com.projeto.exception.AlunoInexistenteException;
+import com.projeto.exception.ArquivoInexistenteException;
+import com.projeto.exception.ExcecaoAlunoDuplicado;
+import com.projeto.exception.ExcecaoTutorDuplicado;
+import com.projeto.exception.GrupoDiscursaoJaexisteException;
+import com.projeto.exception.GrupoInexistenteException;
+import com.projeto.exception.GrupoJaexisteException;
+import com.projeto.exception.TutorExistenteException;
+import com.projeto.exception.TutorInexistenteException;
 
 public class GestorAuxiliarParaSistema {
 
-	private List<Tutor> tutores = new LinkedList<Tutor>();
+	private List<Tutor> tutores;
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
-
+	
+	public  GestorAuxiliarParaSistema(){
+	
+		tutores = new LinkedList<Tutor>();
+	}
+	
 	public boolean finalizou() {
 		return false;
 	}
@@ -20,7 +39,7 @@ public class GestorAuxiliarParaSistema {
 	public void cadastraTutor(Tutor tutorNovo) throws Exception {
 		boolean existe = false;
 		for (Tutor tutorAntigo : this.tutores) {
-			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())) {
+			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula()) || tutorAntigo.getNome().equals(tutorNovo.getNome())) {
 				existe = true;
 				throw new ExcecaoTutorDuplicado();
 			}
