@@ -1,11 +1,13 @@
 package com.projeto.facade;
 
 import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.*;
-import com.projeto.arquivos.*;
+
 import com.projeto.exception.*;
+import com.projeto.negocios.*;
 
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
@@ -23,7 +25,7 @@ public class TestMainProject {
 	 * ArrayList().size(), is(0)); }
 	 */
 
-	@Test(expected = ExcecaoIllegalArgumentException.class)
+	@Test(expected = GrupoDiscursaoJaExisteException.class)
 	public void naoCriarTutorNulo() {
 		Tutor t = new Tutor(null, null);
 		assertEquals(t, null);
@@ -48,7 +50,7 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void loginTutorNoMoodle() {
+	public void loginTutorTest() {
 		final String loginNumber = ".Login21";
 		LoginTutor LoginTutor = new LoginTutor();
 		boolean login = LoginTutor.ValidaSenha(loginNumber);
@@ -63,21 +65,21 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void removeTutorPeloIdTest() throws Exception {
+	public void removerTutorPeloIdTest() throws Exception {
 		Tutor tutor = new Tutor("Otaciso", "12345");
 		gestor.cadastraTutor(tutor);
 		gestor.removeTutorPeloId("12345");
 	}
 
-	@Test(expected = ExcecaoTutorDuplicado.class)
-	public void cadastrarMesmoTutorDuasVezes() throws Exception {
+	@Test(expected = TutorDuplicadoException.class)
+	public void cadastrarMesmoTutorTest() throws Exception {
 		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
 		Tutor tu2 = new Tutor("Otaciso", "123.456.789");
 		gestor.cadastraTutor(tu1);
 		gestor.cadastraTutor(tu2);
 	}
 
-	@Test(expected = ExcecaoTutorDuplicado.class)
+	@Test(expected = TutorDuplicadoException.class)
 	public void cadastrarTutorComMesmaMatriculaTest() throws Exception {
 		Tutor t1 = new Tutor("Otaciso", "123.456");
 		Tutor t2 = new Tutor("Daniel", "123.456");
@@ -161,16 +163,16 @@ public class TestMainProject {
 		assertEquals(aluno1, gestor.pesquisarAlunoPelaMatricula("81011053"));
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void cadastroDoMesmoAlunoTest() {
+	@Test(expected = AlunoDuplicadoException.class)
+	public void cadastrarMesmoAlunoTest() {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
 		Aluno aluno2 = new Aluno("Otaciso", "81011053");
 		gestor.cadastrarAluno(aluno1);
 		gestor.cadastrarAluno(aluno2);
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
-	public void cadastroDeAlunoMesmaMatriculaTest() {
+	@Test(expected = AlunoDuplicadoException.class)
+	public void cadastrarAlunoComMesmaMatriculaTest() {
 		Aluno al1 = new Aluno("Otaciso", "81011055");
 		Aluno al2 = new Aluno("Daniel", "81011055");
 		gestor.cadastrarAluno(al1);
@@ -184,7 +186,7 @@ public class TestMainProject {
 		gestor.removerAlunoPelaMatricula("54321");
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
+	@Test(expected = AlunoDuplicadoException.class)
 	public void removerTodosAlunosCadastradosTest() {
 		Aluno aI = new Aluno(" OtacisoEu ", " 813011053 ");
 		Aluno aII = new Aluno(" OtacisoTu ", " 813011054 ");
@@ -205,7 +207,7 @@ public class TestMainProject {
 		assertEquals(5, alunosCadastrados.size());
 	}
 
-	@Test(expected = ExcecaoAlunoDuplicado.class)
+	@Test(expected = AlunoDuplicadoException.class)
 	public void verificarQuantidadedeAlunosCadastradosTest() {
 		Aluno aI = new Aluno("Mateus", "11111");
 		Aluno aII = new Aluno("Kaué", "22222");
@@ -231,8 +233,8 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void cadastrarGrupoTest() throws GrupoJaexisteException,
-			GrupoInexistenteException {
+	public void cadastrarGrupoTest() throws GrupoDiscursaoJaExisteException,
+			GrupoDiscursaoJaExisteException {
 		Aula aula = new Aula("Aula de Login do Tablet", "01");
 		gestor.cadastrarAula(aula);
 		GrupoDiscursao grupo = new GrupoDiscursao(aula, "A-01");
@@ -252,9 +254,9 @@ public class TestMainProject {
 
 	}
 
-	@Test(expected = GrupoDiscursaoJaexisteException.class)
-	public void cadastraGrupoDiscursaoComMesmoCodigoTest()
-			throws GrupoJaexisteException {
+	@Test(expected = GrupoDiscursaoJaExisteException.class)
+	public void cadastrarGrupoDiscursaoComMesmoCodigoTest()
+			throws GrupoDiscursaoJaExisteException {
 		Aula aula = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestor.cadastrarAula(aula);
 		GrupoDiscursao grupod = new GrupoDiscursao(aula, "A-02");
@@ -267,7 +269,7 @@ public class TestMainProject {
 
 	@Test
 	public void verificarQuantidadeDeGrupoDiscursaoPorAssuntoNoForumTest()
-			throws GrupoJaexisteException {
+			throws GrupoDiscursaoJaExisteException {
 		Aula aI = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestor.cadastrarAula(aI);
 		GrupoDiscursao grupoD_I = new GrupoDiscursao(aI, "Grupo I");
@@ -292,7 +294,7 @@ public class TestMainProject {
 	// Aula 4
 
 	@Test(expected = ExcecaoIllegalArgumentException.class)
-	public void naoCriarAulaNulo() {
+	public void naoCriarAulaNulo()  {
 		Aula a = new Aula(null, null);
 		assertEquals(a, null);
 	}
@@ -314,8 +316,8 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void adicionarAulasAoGrupoDiscursaoTest()
-			throws GrupoJaexisteException {
+	public void adicionarAulaAoGrupoDiscursaoTest()
+			throws GrupoDiscursaoJaExisteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "03");
 		gestor.cadastrarAula(a);
 		GrupoDiscursao gd = new GrupoDiscursao(a, "A-03");
@@ -359,7 +361,7 @@ public class TestMainProject {
 	}
 
 	public void removerAulaDoGrupoDiscursaoTest()
-			throws GrupoJaexisteException, GrupoInexistenteException {
+			throws GrupoDiscursaoJaExisteException, GrupoDiscursaoJaExisteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(a);
 		GrupoDiscursao gd = new GrupoDiscursao("0000-1");
@@ -373,8 +375,8 @@ public class TestMainProject {
 	}
 
 	// Arquivo 5
-	@Test(expected = ExcecaoIllegalArgumentException.class)
-	public void naoCriarAequivoNulo() {
+	@Test(expected = ArquivoInexistenteException.class)
+	public void naoCriarArquivoNulo() {
 		Arquivo aq = new Arquivo(null, null);
 		assertEquals(aq, null);
 	}
@@ -425,7 +427,7 @@ public class TestMainProject {
 	}
 
 	@Test(expected = ArquivoInexistenteException.class)
-	public void pesquisarArquivosInexistenteNoGrupoTest() {
+	public void pesquisarArquivoInexistenteNoGrupoTest() {
 		Arquivo aq = new Arquivo(" Notebook.wma ", " MEC-00000-0 ");
 		gestor.cadastrarArquivos(aq);
 		gestor.pesquisarArquivos(" MEC-00000-00000 ");

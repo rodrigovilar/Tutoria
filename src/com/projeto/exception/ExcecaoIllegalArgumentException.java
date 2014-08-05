@@ -4,6 +4,7 @@ package com.projeto.exception;
 public class ExcecaoIllegalArgumentException extends RuntimeException {
 
 	public ExcecaoIllegalArgumentException(String string) {
+		super(string);
 		
 	}
 

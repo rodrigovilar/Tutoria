@@ -3,10 +3,10 @@ package com.projeto.facade;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.arquivos.Tutor;
-import com.projeto.exception.ExcecaoTutorDuplicado;
+import com.projeto.exception.TutorDuplicadoException;
 import com.projeto.exception.TutorExistenteException;
 import com.projeto.exception.TutorInexistenteException;
+import com.projeto.negocios.Tutor;
 
 public class CadastrarERemover {
 	
@@ -17,7 +17,7 @@ public class CadastrarERemover {
 		for (Tutor tutorAntigo : this.tutores) {
 			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())) {
 				existe = true;
-				throw new ExcecaoTutorDuplicado();
+				throw new TutorDuplicadoException();
 			}
 		}
 		if (existe == false) {

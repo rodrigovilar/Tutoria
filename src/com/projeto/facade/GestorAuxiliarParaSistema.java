@@ -3,37 +3,34 @@ package com.projeto.facade;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.arquivos.Aluno;
-import com.projeto.arquivos.Arquivo;
-import com.projeto.arquivos.Aula;
-import com.projeto.arquivos.GrupoDiscursao;
-import com.projeto.arquivos.Tutor;
+import com.projeto.exception.AlunoDuplicadoException;
 import com.projeto.exception.AlunoExistenteException;
 import com.projeto.exception.AlunoInexistenteException;
 import com.projeto.exception.ArquivoInexistenteException;
-import com.projeto.exception.ExcecaoAlunoDuplicado;
-import com.projeto.exception.ExcecaoIllegalArgumentException;
-import com.projeto.exception.ExcecaoTutorDuplicado;
-import com.projeto.exception.GrupoDiscursaoJaexisteException;
-import com.projeto.exception.GrupoInexistenteException;
-import com.projeto.exception.GrupoJaexisteException;
+import com.projeto.exception.GrupoDiscursaoJaExisteException;
+import com.projeto.exception.TutorDuplicadoException;
 import com.projeto.exception.TutorExistenteException;
 import com.projeto.exception.TutorInexistenteException;
+import com.projeto.negocios.Aluno;
+import com.projeto.negocios.Arquivo;
+import com.projeto.negocios.Aula;
+import com.projeto.negocios.GrupoDiscursao;
+import com.projeto.negocios.Tutor;
 
 public class GestorAuxiliarParaSistema {
 
 	private List<Tutor> tutores;
-	private List<Aluno> alunos;  
+	private List<Aluno> alunos;
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscursao> grupos = new LinkedList<GrupoDiscursao>();
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
-	
-	public  GestorAuxiliarParaSistema(){
-	
+
+	public GestorAuxiliarParaSistema() {
+
 		tutores = new LinkedList<Tutor>();
 		alunos = new LinkedList<Aluno>();
 	}
-	
+
 	public boolean finalizou() {
 		return false;
 	}
@@ -41,9 +38,10 @@ public class GestorAuxiliarParaSistema {
 	public void cadastraTutor(Tutor tutorNovo) throws Exception {
 		boolean existe = false;
 		for (Tutor tutorAntigo : this.tutores) {
-			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula()) || tutorAntigo.getNome().equals(tutorNovo.getNome())) {
+			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())
+					|| tutorAntigo.getNome().equals(tutorNovo.getNome())) {
 				existe = true;
-				throw new ExcecaoTutorDuplicado();
+				throw new TutorDuplicadoException();
 			}
 		}
 		if (existe == false) {
@@ -80,14 +78,14 @@ public class GestorAuxiliarParaSistema {
 
 	// Aluno
 
-	public void cadastrarAluno(Aluno alunos) throws ExcecaoIllegalArgumentException{
+	public void cadastrarAluno(Aluno alunos)
+			throws GrupoDiscursaoJaExisteException {
 		boolean existe = false;
 		for (Aluno aluno : this.alunos) {
-			
-			
+
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
 				existe = true;
-				throw new ExcecaoAlunoDuplicado();
+				throw new AlunoDuplicadoException();
 			}
 		}
 
@@ -179,30 +177,30 @@ public class GestorAuxiliarParaSistema {
 	}
 
 	public void cadastrarGrupoDiscursao(GrupoDiscursao grupod)
-			throws GrupoJaexisteException {
+			throws GrupoDiscursaoJaExisteException {
 		boolean existe = false;
 
 		for (GrupoDiscursao g : this.grupos) {
 			if (g.getiDGrupo().equals(grupod.getiDGrupo())) {
-				throw new GrupoDiscursaoJaexisteException();
+				throw new GrupoDiscursaoJaExisteException("Grupo Existente");
 				// existe = true;
 			}
 		}
 		if (!existe) {
 			this.grupos.add(grupod);
 		} else {
-			throw new GrupoJaexisteException("Erro de iD");
+			throw new GrupoDiscursaoJaExisteException("Grupo Existente");
 		}
 	}
 
 	public GrupoDiscursao pesquisarGrupo(String iDcodigo)
-			throws GrupoInexistenteException {
+			throws GrupoDiscursaoJaExisteException {
 		for (GrupoDiscursao g : this.grupos) {
 			if (g.getiDGrupo().equals(iDcodigo)) {
 				return g;
 			}
 		}
-		throw new GrupoInexistenteException("Grupo Inexistente!");
+		throw new GrupoDiscursaoJaExisteException("Grupo Existente");
 
 	}
 
