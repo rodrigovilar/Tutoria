@@ -1,6 +1,6 @@
  package com.projeto.negocios;
 
-import com.projeto.exception.GrupoDiscursaoJaExisteException;
+import com.projeto.exception.ExcecaoIllegalArgumentException;
 
 
 public class Tutor extends Pessoa {
@@ -9,8 +9,7 @@ public class Tutor extends Pessoa {
 	public Tutor(String nome, String idTutor) {
 		super(nome, idTutor);
 		if (nome == null && idTutor == null) {
-			throw new GrupoDiscursaoJaExisteException(
-					"Tutor nao pode ser nulo!");
+			throw new ExcecaoIllegalArgumentException("Tutor nao pode ser nulo!");
 		}
 	}
 

@@ -18,18 +18,17 @@ public class TestMainProject {
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
 	}
 
-	// Tutor 1
-
-	/*
-	 * @Test public void newArrayListHaveNoElements() { assertThat(new
-	 * ArrayList().size(), is(0)); }
-	 */
-
-	@Test(expected = GrupoDiscursaoJaExisteException.class)
+	// Tutor
+	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarTutorNulo() {
 		Tutor t = new Tutor(null, null);
 		assertEquals(t, null);
+	}
 
+	@Test
+	public void verificarListaDeTutorVaziaTest() {
+		List<Tutor> listTutor = gestor.getListaDeTutores();
+		assertEquals(0, listTutor.size());
 	}
 
 	@Test
@@ -46,7 +45,6 @@ public class TestMainProject {
 		gestor.cadastraTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutores();
 		assertEquals(tut, listTut.get(0));
-
 	}
 
 	@Test
@@ -110,11 +108,6 @@ public class TestMainProject {
 		assertEquals(5, listaCoord.size());
 	}
 
-	@Test
-	public void listaTutorVazia() {
-
-	}
-
 	@Test(expected = TutorInexistenteException.class)
 	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
@@ -123,12 +116,16 @@ public class TestMainProject {
 	}
 
 	// Aluno 2
-
 	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarAlunoNulo() {
 		Aluno a = new Aluno(null, null);
 		assertEquals(a, null);
+	}
 
+	@Test
+	public void verificarListaDeAlunoVaziaTest() {
+		List<Aluno> listAluno = gestor.getListaDeAlunosCadastrados();
+		assertEquals(0, listAluno.size());
 	}
 
 	@Test
@@ -137,7 +134,6 @@ public class TestMainProject {
 		gestor.cadastrarAluno(alunos);
 		List<Aluno> listAluno = gestor.getListaDeAlunosCadastrados();
 		assertEquals(1, listAluno.size());
-
 	}
 
 	@Test
@@ -146,7 +142,6 @@ public class TestMainProject {
 		gestor.cadastrarAluno(a);
 		List<Aluno> lista = gestor.getListaDeAlunosCadastrados();
 		assertEquals(a, lista.get(0));
-
 	}
 
 	@Test
@@ -224,12 +219,10 @@ public class TestMainProject {
 	}
 
 	// Grupo 3
-
 	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarGrupoNulo() {
 		GrupoDiscursao g = new GrupoDiscursao(null, null);
 		assertEquals(g, null);
-
 	}
 
 	@Test
@@ -242,6 +235,11 @@ public class TestMainProject {
 		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
 	}
 
+	public void verificarListaGrupoDiscursaoCadastradoTest() {
+		List<GrupoDiscursao> listGrupo = gestor.getListaDeGruposCadastrados();
+		assertEquals(0, listGrupo.size());
+	}
+
 	@Test
 	public void verificaGrupoDiscursaoCadastradoNaLista() throws Exception {
 
@@ -249,9 +247,8 @@ public class TestMainProject {
 		gestor.cadastrarAula(aula);
 		GrupoDiscursao grupo = new GrupoDiscursao(aula, "X-01");
 		gestor.cadastrarGrupoDiscursao(grupo);
-		List<GrupoDiscursao> listgd = gestor.getListaDeGruposNoForum();
+		List<GrupoDiscursao> listgd = gestor.getListaDeGruposCadastrados();
 		assertEquals(grupo, listgd.get(0));
-
 	}
 
 	@Test(expected = GrupoDiscursaoJaExisteException.class)
@@ -287,14 +284,13 @@ public class TestMainProject {
 		GrupoDiscursao grupoD_IV = new GrupoDiscursao(aIV, "Grupo IV");
 		gestor.cadastrarGrupoDiscursao(grupoD_IV);
 		List<GrupoDiscursao> qtdGrupoCadastrados = gestor
-				.getListaDeGruposNoForum();
+				.getListaDeGruposCadastrados();
 		assertEquals(4, qtdGrupoCadastrados.size());
 	}
 
 	// Aula 4
-
 	@Test(expected = ExcecaoIllegalArgumentException.class)
-	public void naoCriarAulaNulo()  {
+	public void naoCriarAulaNulo() {
 		Aula a = new Aula(null, null);
 		assertEquals(a, null);
 	}
@@ -305,6 +301,12 @@ public class TestMainProject {
 		gestor.cadastrarAula(aula);
 		List<Aula> listAula = gestor.getListaDeAulasCadastradas();
 		assertEquals(1, listAula.size());
+	}
+	
+	@Test
+	public void verificarListaDeAulaVaziaTest() {
+		List<Aula> listAula = gestor.getListaDeAulasCadastradas();
+		assertEquals(0, listAula.size());
 	}
 
 	@Test
@@ -361,7 +363,8 @@ public class TestMainProject {
 	}
 
 	public void removerAulaDoGrupoDiscursaoTest()
-			throws GrupoDiscursaoJaExisteException, GrupoDiscursaoJaExisteException {
+			throws GrupoDiscursaoJaExisteException,
+			GrupoDiscursaoJaExisteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(a);
 		GrupoDiscursao gd = new GrupoDiscursao("0000-1");
@@ -380,7 +383,7 @@ public class TestMainProject {
 		Arquivo aq = new Arquivo(null, null);
 		assertEquals(aq, null);
 	}
-	
+
 	@Test
 	public void cadastrarArquivoTest() throws Exception {
 		Arquivo a = new Arquivo("Segundo dia de aula", "0002");
@@ -389,6 +392,13 @@ public class TestMainProject {
 		assertEquals(1, listArquivos.size());
 	}
 	
+	@Test
+	public void verificarListaDeArquivoVaziaTest() {
+		List<Arquivo> listArquivo = gestor.getListaDeArquivos();
+		assertEquals(0, listArquivo.size());
+	}
+
+
 	@Test
 	public void verificaArquivoCadastradaNaLista() throws Exception {
 		Arquivo a = new Arquivo("Primeiro dia de aula", "0001");
@@ -443,4 +453,3 @@ public class TestMainProject {
 	}
 
 }
-// tagXIV
