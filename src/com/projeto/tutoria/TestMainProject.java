@@ -2,6 +2,7 @@ package com.projeto.tutoria;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.*;
@@ -20,6 +21,11 @@ public class TestMainProject {
 
 	// Tutor 1
 
+	/*@Test
+	public void newArrayListHaveNoElements() {
+		assertThat(new ArrayList().size(), is(0));
+	}*/
+
 	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarTutorNulo() {
 		Tutor t = new Tutor(null, null);
@@ -33,6 +39,19 @@ public class TestMainProject {
 		gestor.cadastraTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutores();
 		assertEquals(1, listTut.size());
+	}
+
+	@Test
+	public void verificaTutorCadastradoNaLista() throws Exception {
+		Tutor tut = new Tutor("Otaciso", "12345");
+		gestor.cadastraTutor(tut);
+		List<Tutor> listTut = gestor.getListaDeTutores();
+		assertEquals(tut, listTut.get(0));
+		/*
+		Tutor t = new Tutor("Otaciso", "12345");
+		gestor.cadastraTutor(t);
+		equals(0); */
+		 // Assert.assertEquals("A lista vazia deve ter 0 elementos", 0, listaVazia.size());
 	}
 
 	@Test
@@ -81,7 +100,7 @@ public class TestMainProject {
 	}
 
 	@Test
-	public void verificarListadeTutoresCadastradosTest() throws Exception {
+	public void verificarSizeListadeTutoresCadastradosTest() throws Exception {
 		Tutor t1 = new Tutor("Mateus", "11111");
 		Tutor t2 = new Tutor("Kaué", "22222");
 		Tutor t3 = new Tutor("Otaciso", "333333");
@@ -329,7 +348,7 @@ public class TestMainProject {
 		Arquivo aq = new Arquivo(null, null);
 		assertEquals(aq, null);
 	}
-	
+
 	@Test
 	public void removerArquivosTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
