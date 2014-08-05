@@ -3,6 +3,8 @@ package com.projeto.arquivos;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.projeto.exception.ExcecaoIllegalArgumentException;
+
 public class GrupoDiscursao {
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private String iDGrupo;
@@ -11,6 +13,10 @@ public class GrupoDiscursao {
 	public GrupoDiscursao(Aula aula, String iDGrupo) {
 		aulas.add(aula);
 		this.iDGrupo = iDGrupo;
+		if (aula == null && iDGrupo == null) {
+			throw new ExcecaoIllegalArgumentException(
+					"Aluno nao pode ser nulo!");
+		}
 
 	}
 
@@ -69,8 +75,6 @@ public class GrupoDiscursao {
 		}
 		return null;
 	}
-	
-
 
 	@Override
 	public String toString() {
@@ -78,6 +82,4 @@ public class GrupoDiscursao {
 				+ ", alunosParticipantes=" + alunosParticipantes + "]";
 	}
 
-
-	
 }

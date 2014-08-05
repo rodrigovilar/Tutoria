@@ -12,6 +12,7 @@ import com.projeto.exception.AlunoExistenteException;
 import com.projeto.exception.AlunoInexistenteException;
 import com.projeto.exception.ArquivoInexistenteException;
 import com.projeto.exception.ExcecaoAlunoDuplicado;
+import com.projeto.exception.ExcecaoIllegalArgumentException;
 import com.projeto.exception.ExcecaoTutorDuplicado;
 import com.projeto.exception.GrupoDiscursaoJaexisteException;
 import com.projeto.exception.GrupoInexistenteException;
@@ -78,9 +79,11 @@ public class GestorAuxiliarParaSistema {
 
 	// Aluno
 
-	public void cadastrarAluno(Aluno alunos) {
+	public void cadastrarAluno(Aluno alunos) throws ExcecaoIllegalArgumentException{
 		boolean existe = false;
 		for (Aluno aluno : this.alunos) {
+			
+			
 			if (aluno.getMatricula().equals(aluno.getMatricula())) {
 				existe = true;
 				throw new ExcecaoAlunoDuplicado();

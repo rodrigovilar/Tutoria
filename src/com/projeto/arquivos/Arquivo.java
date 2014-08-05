@@ -1,5 +1,7 @@
 package com.projeto.arquivos;
 
+import com.projeto.exception.ExcecaoIllegalArgumentException;
+
 public class Arquivo {
 
 	private String nome;
@@ -9,6 +11,10 @@ public class Arquivo {
 		super();
 		this.nome = nome;
 		IdArquivo = idArquivo;
+		if (nome == null && idArquivo == null) {
+			throw new ExcecaoIllegalArgumentException(
+					"Aula nao pode ser nula!");
+		}
 
 	}
 

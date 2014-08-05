@@ -18,7 +18,15 @@ public class TestMainProject {
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
 	}
 
-	// Tutor
+	// Tutor 1
+
+	@Test(expected = ExcecaoIllegalArgumentException.class)
+	public void naoCriarTutorNulo() {
+		Tutor t = new Tutor(null, null);
+		assertEquals(t, null);
+
+	}
+
 	@Test
 	public void cadastrarTutorNoSistemaTest() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
@@ -88,6 +96,11 @@ public class TestMainProject {
 		assertEquals(5, listaCoord.size());
 	}
 
+	@Test
+	public void listaTutorVazia() {
+
+	}
+
 	@Test(expected = TutorInexistenteException.class)
 	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
@@ -95,7 +108,15 @@ public class TestMainProject {
 		gestor.pesquisarTutorPeloId("00000");
 	}
 
-	// Aluno
+	// Aluno 2
+
+	@Test(expected = ExcecaoIllegalArgumentException.class)
+	public void naoCriarAlunoNulo() {
+		Aluno a = new Aluno(null, null);
+		assertEquals(a, null);
+
+	}
+
 	@Test
 	public void cadastraAlunoNoGestorTest() throws Exception {
 		Aluno alunos = new Aluno("Otaciso", "81011053");
@@ -179,7 +200,14 @@ public class TestMainProject {
 		assertEquals(5, alunoCadastrados.size());
 	}
 
-	// Grupo
+	// Grupo 3
+
+	@Test(expected = ExcecaoIllegalArgumentException.class)
+	public void naoCriarGrupoNulo() {
+		GrupoDiscursao g = new GrupoDiscursao(null, null);
+		assertEquals(g, null);
+
+	}
 
 	@Test
 	public void cadastrarGrupoTest() throws GrupoJaexisteException,
@@ -240,7 +268,13 @@ public class TestMainProject {
 		assertEquals(4, qtdGrupoCadastrados.size());
 	}
 
-	// Aula
+	// Aula 4
+
+	@Test(expected = ExcecaoIllegalArgumentException.class)
+	public void naoCriarAulaNulo() {
+		Aula a = new Aula(null, null);
+		assertEquals(a, null);
+	}
 
 	@Test
 	public void pesquisarAulaTest() {
@@ -289,6 +323,13 @@ public class TestMainProject {
 		assertEquals(0, aulas.size());
 	}
 
+	// Arquivo 5
+	@Test(expected = ExcecaoIllegalArgumentException.class)
+	public void naoCriarAequivoNulo() {
+		Arquivo aq = new Arquivo(null, null);
+		assertEquals(aq, null);
+	}
+	
 	@Test
 	public void removerArquivosTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
@@ -310,7 +351,12 @@ public class TestMainProject {
 
 	@Test(expected = ArquivoInexistenteException.class)
 	public void removerArquivoInexistenteTest() {
-		gestor.removerArquivo("MEC-19823-01 + 2");
+		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
+				"MEC-19823-01");
+		gestor.cadastrarArquivos(aq);
+		gestor.pesquisarArquivos("MEC-19823-01");
+		gestor.removerArquivo("MEC-19823");
+
 	}
 
 	@Test(expected = ArquivoInexistenteException.class)

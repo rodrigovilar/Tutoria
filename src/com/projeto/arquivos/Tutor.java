@@ -1,10 +1,16 @@
-package com.projeto.arquivos;
+ package com.projeto.arquivos;
+
+import com.projeto.exception.ExcecaoIllegalArgumentException;
 
 public class Tutor extends Pessoa {
 	private String senha;
 
 	public Tutor(String nome, String idTutor) {
 		super(nome, idTutor);
+		if (nome == null && idTutor == null) {
+			throw new ExcecaoIllegalArgumentException(
+					"Tutor nao pode ser nulo!");
+		}
 	}
 
 	public String getDescricao() {
