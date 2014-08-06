@@ -34,7 +34,7 @@ public class TestMainProject {
 	@Test
 	public void cadastrarTutorNoSistemaTest() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
-		gestor.cadastraTutor(tut);
+		gestor.cadastrarTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutores();
 		assertEquals(1, listTut.size());
 	}
@@ -42,7 +42,7 @@ public class TestMainProject {
 	@Test
 	public void verificaTutorCadastradoNaLista() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
-		gestor.cadastraTutor(tut);
+		gestor.cadastrarTutor(tut);
 		List<Tutor> listTut = gestor.getListaDeTutores();
 		assertEquals(tut, listTut.get(0));
 	}
@@ -58,14 +58,14 @@ public class TestMainProject {
 	@Test
 	public void pesquisarTutorPeloIdTest() throws Exception {
 		Tutor t = new Tutor("Otaciso", "12345");
-		gestor.cadastraTutor(t);
+		gestor.cadastrarTutor(t);
 		assertEquals(t, gestor.pesquisarTutorPeloId("12345"));
 	}
 
 	@Test
 	public void removerTutorPeloIdTest() throws Exception {
 		Tutor tutor = new Tutor("Otaciso", "12345");
-		gestor.cadastraTutor(tutor);
+		gestor.cadastrarTutor(tutor);
 		gestor.removeTutorPeloId("12345");
 	}
 
@@ -73,22 +73,22 @@ public class TestMainProject {
 	public void cadastrarMesmoTutorTest() throws Exception {
 		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
 		Tutor tu2 = new Tutor("Otaciso", "123.456.789");
-		gestor.cadastraTutor(tu1);
-		gestor.cadastraTutor(tu2);
+		gestor.cadastrarTutor(tu1);
+		gestor.cadastrarTutor(tu2);
 	}
 
 	@Test(expected = TutorDuplicadoException.class)
 	public void cadastrarTutorComMesmaMatriculaTest() throws Exception {
 		Tutor t1 = new Tutor("Otaciso", "123.456");
 		Tutor t2 = new Tutor("Daniel", "123.456");
-		gestor.cadastraTutor(t1);
-		gestor.cadastraTutor(t2);
+		gestor.cadastrarTutor(t1);
+		gestor.cadastrarTutor(t2);
 	}
 
 	@Test(expected = TutorInexistenteException.class)
 	public void removerTutorInexistenteTest() throws Exception {
 		Tutor tutor = new Tutor("Thiego", "12345");
-		gestor.cadastraTutor(tutor);
+		gestor.cadastrarTutor(tutor);
 		gestor.removeTutorPeloId("54321");
 	}
 
@@ -99,19 +99,44 @@ public class TestMainProject {
 		Tutor t3 = new Tutor("Otaciso", "333333");
 		Tutor t4 = new Tutor("Thiego", "444444");
 		Tutor t5 = new Tutor("Daniel", "555555");
-		gestor.cadastraTutor(t1);
-		gestor.cadastraTutor(t2);
-		gestor.cadastraTutor(t3);
-		gestor.cadastraTutor(t4);
-		gestor.cadastraTutor(t5);
-		List<Tutor> listaCoord = gestor.getListaDeTutores();
-		assertEquals(5, listaCoord.size());
+		gestor.cadastrarTutor(t1);
+		gestor.cadastrarTutor(t2);
+		gestor.cadastrarTutor(t3);
+		gestor.cadastrarTutor(t4);
+		gestor.cadastrarTutor(t5);
+		List<Tutor> listaTut = gestor.getListaDeTutores();
+		assertEquals(5, listaTut.size());
 	}
 
+	@Test(expected = TutorDuplicadoException.class)
+	public void removeTutoresCadastrados() throws Exception {
+		Tutor tI = new Tutor(" OtacisoEu1 ", " 813011053 ");
+		Tutor tII = new Tutor(" OtacisoTu2 ", " 813011054 ");
+		Tutor tIII = new Tutor(" OtacisoNos3 ", " 813011055 ");
+		Tutor tIV = new Tutor(" OtacisoVois4 ", " 813011056 ");
+		Tutor tV = new Tutor(" OtacisoEles5 ", " 813011057 ");
+		gestor.cadastrarTutor(tI);
+		gestor.cadastrarTutor(tII);
+		gestor.cadastrarTutor(tII);
+		gestor.cadastrarTutor(tIV);
+		gestor.cadastrarTutor(tV);
+		gestor.removeTutorPeloId(tI.getMatricula());
+		gestor.removeTutorPeloId(tII.getMatricula());
+		gestor.removeTutorPeloId(tIII.getMatricula());
+		gestor.removeTutorPeloId(tIV.getMatricula());
+		gestor.removeTutorPeloId(tV.getMatricula());
+		List<Tutor> listaTut = gestor.getListaDeTutores();
+		assertEquals(0, listaTut.size());
+
+	}
+
+	/*
+	 * @After protected void terminou() { listaVazia = null; }
+	 */
 	@Test(expected = TutorInexistenteException.class)
 	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
-		gestor.cadastraTutor(t);
+		gestor.cadastrarTutor(t);
 		gestor.pesquisarTutorPeloId("00000");
 	}
 
@@ -199,7 +224,7 @@ public class TestMainProject {
 		gestor.removerAlunoPelaMatricula(aIV.getMatricula());
 		gestor.removerAlunoPelaMatricula(aV.getMatricula());
 		List<Aluno> alunosCadastrados = gestor.getListaDeAlunosCadastrados();
-		assertEquals(5, alunosCadastrados.size());
+		assertEquals(0, alunosCadastrados.size());
 	}
 
 	@Test(expected = AlunoDuplicadoException.class)
@@ -221,22 +246,22 @@ public class TestMainProject {
 	// Grupo 3
 	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarGrupoNulo() {
-		GrupoDiscursao g = new GrupoDiscursao(null, null);
+		GrupoDiscussao g = new GrupoDiscussao(null, null);
 		assertEquals(g, null);
 	}
 
 	@Test
-	public void cadastrarGrupoTest() throws GrupoDiscursaoJaExisteException,
-			GrupoDiscursaoJaExisteException {
+	public void cadastrarGrupoTest() throws GrupoDiscurssaoJaExisteException,
+			GrupoDiscurssaoJaExisteException {
 		Aula aula = new Aula("Aula de Login do Tablet", "01");
 		gestor.cadastrarAula(aula);
-		GrupoDiscursao grupo = new GrupoDiscursao(aula, "A-01");
+		GrupoDiscussao grupo = new GrupoDiscussao(aula, "A-01");
 		gestor.cadastrarGrupoDiscursao(grupo);
 		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
 	}
 
 	public void verificarListaGrupoDiscursaoCadastradoTest() {
-		List<GrupoDiscursao> listGrupo = gestor.getListaDeGruposCadastrados();
+		List<GrupoDiscussao> listGrupo = gestor.getListaDeGruposCadastrados();
 		assertEquals(0, listGrupo.size());
 	}
 
@@ -245,45 +270,45 @@ public class TestMainProject {
 
 		Aula aula = new Aula("Aula de Instalação de App", "-01");
 		gestor.cadastrarAula(aula);
-		GrupoDiscursao grupo = new GrupoDiscursao(aula, "X-01");
+		GrupoDiscussao grupo = new GrupoDiscussao(aula, "X-01");
 		gestor.cadastrarGrupoDiscursao(grupo);
-		List<GrupoDiscursao> listgd = gestor.getListaDeGruposCadastrados();
+		List<GrupoDiscussao> listgd = gestor.getListaDeGruposCadastrados();
 		assertEquals(grupo, listgd.get(0));
 	}
 
-	@Test(expected = GrupoDiscursaoJaExisteException.class)
+	@Test(expected = GrupoDiscurssaoJaExisteException.class)
 	public void cadastrarGrupoDiscursaoComMesmoCodigoTest()
-			throws GrupoDiscursaoJaExisteException {
+			throws GrupoDiscurssaoJaExisteException {
 		Aula aula = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestor.cadastrarAula(aula);
-		GrupoDiscursao grupod = new GrupoDiscursao(aula, "A-02");
+		GrupoDiscussao grupod = new GrupoDiscussao(aula, "A-02");
 		gestor.cadastrarGrupoDiscursao(grupod);
 		Aula aulaII = new Aula("Enviar Exercio ao Modle", "03");
 		gestor.cadastrarAula(aulaII);
-		GrupoDiscursao grupod2 = new GrupoDiscursao(aula, "A-02");
+		GrupoDiscussao grupod2 = new GrupoDiscussao(aula, "A-02");
 		gestor.cadastrarGrupoDiscursao(grupod2);
 	}
 
 	@Test
 	public void verificarQuantidadeDeGrupoDiscursaoPorAssuntoNoForumTest()
-			throws GrupoDiscursaoJaExisteException {
+			throws GrupoDiscurssaoJaExisteException {
 		Aula aI = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestor.cadastrarAula(aI);
-		GrupoDiscursao grupoD_I = new GrupoDiscursao(aI, "Grupo I");
+		GrupoDiscussao grupoD_I = new GrupoDiscussao(aI, "Grupo I");
 		gestor.cadastrarGrupoDiscursao(grupoD_I);
 		Aula aII = new Aula("Enviar Exercio ao Modle", "03");
 		gestor.cadastrarAula(aII);
-		GrupoDiscursao grupoD_II = new GrupoDiscursao(aII, "Grupo II");
+		GrupoDiscussao grupoD_II = new GrupoDiscussao(aII, "Grupo II");
 		gestor.cadastrarGrupoDiscursao(grupoD_II);
 		Aula aIII = new Aula("Aula de Login do Tablet", "01");
 		gestor.cadastrarAula(aIII);
-		GrupoDiscursao grupoD_III = new GrupoDiscursao(aIII, "Grupo III");
+		GrupoDiscussao grupoD_III = new GrupoDiscussao(aIII, "Grupo III");
 		gestor.cadastrarGrupoDiscursao(grupoD_III);
 		Aula aIV = new Aula("Acessar aulas no moodle", "04");
 		gestor.cadastrarAula(aIV);
-		GrupoDiscursao grupoD_IV = new GrupoDiscursao(aIV, "Grupo IV");
+		GrupoDiscussao grupoD_IV = new GrupoDiscussao(aIV, "Grupo IV");
 		gestor.cadastrarGrupoDiscursao(grupoD_IV);
-		List<GrupoDiscursao> qtdGrupoCadastrados = gestor
+		List<GrupoDiscussao> qtdGrupoCadastrados = gestor
 				.getListaDeGruposCadastrados();
 		assertEquals(4, qtdGrupoCadastrados.size());
 	}
@@ -302,7 +327,7 @@ public class TestMainProject {
 		List<Aula> listAula = gestor.getListaDeAulasCadastradas();
 		assertEquals(1, listAula.size());
 	}
-	
+
 	@Test
 	public void verificarListaDeAulaVaziaTest() {
 		List<Aula> listAula = gestor.getListaDeAulasCadastradas();
@@ -319,10 +344,10 @@ public class TestMainProject {
 
 	@Test
 	public void adicionarAulaAoGrupoDiscursaoTest()
-			throws GrupoDiscursaoJaExisteException {
+			throws GrupoDiscurssaoJaExisteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "03");
 		gestor.cadastrarAula(a);
-		GrupoDiscursao gd = new GrupoDiscursao(a, "A-03");
+		GrupoDiscussao gd = new GrupoDiscussao(a, "A-03");
 		gestor.cadastrarGrupoDiscursao(gd);
 		gestor.adicionarAulaAoGrupo(a, gd);
 		List<Aula> aulas = gestor.getListaDeAulasCadastradasPorGrupo(gd);
@@ -363,14 +388,14 @@ public class TestMainProject {
 	}
 
 	public void removerAulaDoGrupoDiscursaoTest()
-			throws GrupoDiscursaoJaExisteException,
-			GrupoDiscursaoJaExisteException {
+			throws GrupoDiscurssaoJaExisteException,
+			GrupoDiscurssaoJaExisteException {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestor.cadastrarAula(a);
-		GrupoDiscursao gd = new GrupoDiscursao("0000-1");
+		GrupoDiscussao gd = new GrupoDiscussao("0000-1");
 		gestor.cadastrarGrupoDiscursao(gd);
 		Aula a1 = gestor.pesquisaAula("05");
-		GrupoDiscursao gd1 = gestor.pesquisarGrupo("0000-1");
+		GrupoDiscussao gd1 = gestor.pesquisarGrupo("0000-1");
 		gestor.adicionarAulaAoGrupo(a1, gd1);
 		gestor.removerAulaDoGrupoDiscursao(a1, gd1);
 		List<Aula> aulas = gestor.getListaDeAulasCadastradasPorGrupo(gd1);
@@ -391,13 +416,12 @@ public class TestMainProject {
 		List<Arquivo> listArquivos = gestor.getListaDeArquivos();
 		assertEquals(1, listArquivos.size());
 	}
-	
+
 	@Test
 	public void verificarListaDeArquivoVaziaTest() {
 		List<Arquivo> listArquivo = gestor.getListaDeArquivos();
 		assertEquals(0, listArquivo.size());
 	}
-
 
 	@Test
 	public void verificaArquivoCadastradaNaLista() throws Exception {
