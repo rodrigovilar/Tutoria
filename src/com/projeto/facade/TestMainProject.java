@@ -311,7 +311,7 @@ public class TestMainProject {
 	
 	@Test 
 	public void cadastrarAlunoNoGrupoDiscurssaoTest(){
-		Aula al = new Aula("Ministrar curso de Scratch","987");
+		Aula al = new Aula("Aula de Login do Tablet", "01");
 		GrupoDiscussao gd = new GrupoDiscussao(al," 05 ");
 		gestor.cadastrarGrupoDiscursao(gd);
 		Aluno aI = new Aluno(" Daniel "," 011053 ");
@@ -324,6 +324,64 @@ public class TestMainProject {
 		assertEquals(aII, alunosParticipantes.get(1));	
 	}
 	
+	@Test(expected = AlunoDuplicadoException.class)
+	public void cadastrarAlunoDuplicadoNoGrupoTest(){
+		Aluno alI = new Aluno(" Otaciso ", " 81011053");
+		Aluno alII = new Aluno(" Otaciso ", " 81011053");
+		gestor.cadastrarAluno(alI);
+		gestor.cadastrarAluno(alII);
+		Aluno aII = gestor.pesquisaAlunoPeloNome(" Otaciso ");
+		Aluno aIII = gestor.pesquisaAlunoPeloNome(" Otaciso ");		
+		Aula aulaI = new Aula("Aula de Login do Tablet com senha", " 02 ");
+		Aula aulaII = new Aula("Aula de Login do Tablet com senha e nome", " 03 ");
+		GrupoDiscussao gdI = new GrupoDiscussao(aulaI, " 02 ");
+		GrupoDiscussao gdII = new GrupoDiscussao(aulaII, " 03 ");
+		gestor.cadastrarAlunosParticipantes(aII,gdI);
+		gestor.cadastrarAlunosParticipantes(aIII,gdII);
+	}
+	/*
+	vvvvvvvvvvvvvvvvv
+	@Test(expected = AlunoDuplicadoException.class)
+	public void cadastrarMesmoAlunoTest() {
+		Aluno aluno1 = new Aluno("Otaciso", "81011053");
+		Aluno aluno2 = new Aluno("Otaciso", "81011053");
+		gestor.cadastrarAluno(aluno1);
+		gestor.cadastrarAluno(aluno2);
+	}
+
+vvvvvvvvvvvvvvvvvvvvvvvvvvvv
+	
+	public void cadastrarAlunosNoGrupoDiscurssaoTest(){
+		Aula a = new Aula("Ministrar curso de Scratch","4346");
+		Grupo g = new Grupo(t,"123");
+		Aluno a = new Aluno("Deyvison","12234576");
+		Aluno a1 = new Aluno("Tayna","53344545");
+		g.cadastrarParticipante(a);
+		g.cadastrarParticipante(a1);
+	}
+	
+	@Test
+	public void trocarMensagensEntreAlunosnoGrupo() {
+		Aula aula = new Aula("Aula de Login do Tablet", "01");
+		gestor.cadastrarAula(aula);
+		GrupoDiscussao grupo = new GrupoDiscussao(aula, "A-01");
+		gestor.cadastrarGrupoDiscursao(grupo);
+		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
+		
+		
+		Aluno aluno1 = new Aluno("Cristal", "LCC");
+		Estudante estudante2 = criarSalvarEstudante(face, "Presidente", "LCC");
+
+		face.enviarMensagem(estudante1, estudante2, "Quer tc?");
+		
+		List<Mensagem> resultado = face.getMensagens();
+		Assert.assertEquals(1, resultado.size());
+		Mensagem mensagemSalva = resultado.get(0);
+		
+		Assert.assertEquals(estudante1, mensagemSalva.getOrigem());
+		Assert.assertEquals(estudante2, mensagemSalva.getDestino());
+		Assert.assertEquals("Quer tc?", mensagemSalva.getTexto());
+	}*/
 
 	// Aula 4
 	@Test(expected = ExcecaoIllegalArgumentException.class)
