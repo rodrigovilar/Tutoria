@@ -1,21 +1,11 @@
 package com.projeto.facade;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.AlunoDuplicadoException;
-import com.projeto.exception.AlunoExistenteException;
-import com.projeto.exception.AlunoInexistenteException;
-import com.projeto.exception.ArquivoInexistenteException;
-import com.projeto.exception.GrupoDiscurssaoJaExisteException;
-import com.projeto.exception.TutorDuplicadoException;
-import com.projeto.exception.TutorExistenteException;
-import com.projeto.exception.TutorInexistenteException;
-import com.projeto.negocios.Aluno;
-import com.projeto.negocios.Arquivo;
-import com.projeto.negocios.Aula;
-import com.projeto.negocios.GrupoDiscussao;
-import com.projeto.negocios.Tutor;
+import com.projeto.exception.*;
+import com.projeto.negocios.*;
 
 public class GestorAuxiliarParaSistema {
 
@@ -24,6 +14,30 @@ public class GestorAuxiliarParaSistema {
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscussao> grupos = new LinkedList<GrupoDiscussao>();
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
+
+	private List<Mensagem> mensagens = new ArrayList<>();
+
+	public void add(Aluno aluno) {
+		alunos.add(aluno);
+	}
+
+	public List<Aluno> getAluno() {
+		return alunos;
+	}
+
+	public void enviarMensagem(Aluno origem, Aluno destino, String texto) {
+
+		Mensagem mensagem = new Mensagem();
+		mensagem.setDestino(destino);
+		mensagem.setOrigem(origem);
+		mensagem.setTexto(texto);
+
+		mensagens.add(mensagem);
+	}
+
+	public List<Mensagem> getMensagens() {
+		return mensagens;
+	}
 
 	public GestorAuxiliarParaSistema() {
 
@@ -96,8 +110,8 @@ public class GestorAuxiliarParaSistema {
 		}// throw new ExcecaoAlunoDuplicado();
 
 	}
-	
-	public void cadastrarAlunosParticipantes(Aluno al,GrupoDiscussao gd) {
+
+	public void cadastrarAlunosParticipantes(Aluno al, GrupoDiscussao gd) {
 		gd.cadastrarAlunosParticipantes(al);
 
 	}
@@ -188,7 +202,7 @@ public class GestorAuxiliarParaSistema {
 		for (GrupoDiscussao g : this.grupos) {
 			if (g.getiDGrupo().equals(grupod.getiDGrupo())) {
 				throw new GrupoDiscurssaoJaExisteException("Grupo Existente");
-				
+
 			}
 		}
 		if (!existe) {

@@ -67,8 +67,8 @@ public class GrupoDiscussao {
 		}
 		return null;
 	}
-	
-	public List<Aluno> listaDeAlunosParticipantes(){
+
+	public List<Aluno> listaDeAlunosParticipantes() {
 		return this.alunosParticipantes;
 	}
 
@@ -85,6 +85,11 @@ public class GrupoDiscussao {
 	public String toString() {
 		return "GrupoDiscursao [aulas=" + aulas + ", iDGrupo=" + iDGrupo
 				+ ", alunosParticipantes=" + alunosParticipantes + "]";
+	}
+
+	public void add(Aluno aluno) {
+		this.alunosParticipantes.add(aluno);
+
 	}
 
 }
