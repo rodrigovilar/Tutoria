@@ -3,6 +3,7 @@ package com.projeto.negocios;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.projeto.exception.AlunoExistenteException;
 import com.projeto.exception.ExcecaoIllegalArgumentException;
 
 public class GrupoDiscussao {
@@ -14,7 +15,8 @@ public class GrupoDiscussao {
 		aulas.add(aula);
 		this.iDGrupo = iDGrupo;
 		if (aula == null && iDGrupo == null) {
-			throw new ExcecaoIllegalArgumentException("Aluno nao pode ser nulo!");
+			throw new ExcecaoIllegalArgumentException(
+					"Aluno nao pode ser nulo!");
 		}
 
 	}
@@ -39,13 +41,13 @@ public class GrupoDiscussao {
 		return this.iDGrupo;
 	}
 
-	public void cadastrarAlunosParticipantes(Aluno a1) {
-		for (Aluno a : this.alunosParticipantes) {
-			if (a.equals(a1)) {
-				throw new RuntimeException("ERRO!");
+	public void cadastrarAlunosParticipantes(Aluno adicionarAluno) {
+		for (Aluno alun : this.alunosParticipantes) {
+			if (alun.equals(adicionarAluno)) {
+				throw new AlunoExistenteException("AlunoExistenteException!");
 			}
 		}
-		this.alunosParticipantes.add(a1);
+		this.alunosParticipantes.add(adicionarAluno);
 
 	}
 
@@ -64,6 +66,10 @@ public class GrupoDiscussao {
 			}
 		}
 		return null;
+	}
+	
+	public List<Aluno> listaDeAlunosParticipantes(){
+		return this.alunosParticipantes;
 	}
 
 	public Aula pesquisaAula(String pa) {

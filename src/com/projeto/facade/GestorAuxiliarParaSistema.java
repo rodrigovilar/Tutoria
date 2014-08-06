@@ -96,6 +96,11 @@ public class GestorAuxiliarParaSistema {
 		}// throw new ExcecaoAlunoDuplicado();
 
 	}
+	
+	public void cadastrarAlunosParticipantes(Aluno al,GrupoDiscussao gd) {
+		gd.cadastrarAlunosParticipantes(al);
+
+	}
 
 	public Aluno pesquisaAlunoPeloNome(String nome)
 			throws AlunoInexistenteException {
@@ -183,7 +188,7 @@ public class GestorAuxiliarParaSistema {
 		for (GrupoDiscussao g : this.grupos) {
 			if (g.getiDGrupo().equals(grupod.getiDGrupo())) {
 				throw new GrupoDiscurssaoJaExisteException("Grupo Existente");
-				// existe = true;
+				
 			}
 		}
 		if (!existe) {

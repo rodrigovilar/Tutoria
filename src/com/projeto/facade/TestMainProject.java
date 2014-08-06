@@ -130,9 +130,6 @@ public class TestMainProject {
 
 	}
 
-	/*
-	 * @After protected void terminou() { listaVazia = null; }
-	 */
 	@Test(expected = TutorInexistenteException.class)
 	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
@@ -242,7 +239,7 @@ public class TestMainProject {
 		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
 		assertEquals(5, alunoCadastrados.size());
 	}
-
+	
 	// Grupo 3
 	@Test(expected = ExcecaoIllegalArgumentException.class)
 	public void naoCriarGrupoNulo() {
@@ -260,14 +257,13 @@ public class TestMainProject {
 		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
 	}
 
-	public void verificarListaGrupoDiscursaoCadastradoTest() {
+	public void verificarListaGrupoDiscurssaoCadastradoVaziaTest() {
 		List<GrupoDiscussao> listGrupo = gestor.getListaDeGruposCadastrados();
 		assertEquals(0, listGrupo.size());
 	}
 
 	@Test
-	public void verificaGrupoDiscursaoCadastradoNaLista() throws Exception {
-
+	public void verificaGrupoDiscurssaoCadastradoNaLista() throws Exception {
 		Aula aula = new Aula("Aula de Instalação de App", "-01");
 		gestor.cadastrarAula(aula);
 		GrupoDiscussao grupo = new GrupoDiscussao(aula, "X-01");
@@ -311,7 +307,23 @@ public class TestMainProject {
 		List<GrupoDiscussao> qtdGrupoCadastrados = gestor
 				.getListaDeGruposCadastrados();
 		assertEquals(4, qtdGrupoCadastrados.size());
+	}		
+	
+	@Test 
+	public void cadastrarAlunoNoGrupoDiscurssaoTest(){
+		Aula al = new Aula("Ministrar curso de Scratch","987");
+		GrupoDiscussao gd = new GrupoDiscussao(al," 05 ");
+		gestor.cadastrarGrupoDiscursao(gd);
+		Aluno aI = new Aluno(" Daniel "," 011053 ");
+		Aluno aII = new Aluno(" Thiego "," 011054 ");
+		gestor.cadastrarAlunosParticipantes(aI,gd);
+		gestor.cadastrarAlunosParticipantes(aII,gd);
+		List<Aluno> alunosParticipantes = gd.listaDeAlunosParticipantes();
+		assertEquals(2, alunosParticipantes.size());
+		assertEquals(aI, alunosParticipantes.get(0));
+		assertEquals(aII, alunosParticipantes.get(1));	
 	}
+	
 
 	// Aula 4
 	@Test(expected = ExcecaoIllegalArgumentException.class)
