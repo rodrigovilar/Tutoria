@@ -11,12 +11,25 @@ import com.projeto.negocios.*;
 
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
-	private GestorDeTutor gestort = new GestorDeTutor();
+	private GestorDeTutor gestort;
+	private GestorDeAluno gestorA;
 
 	@Before
 	public void iniciarTest() {
 		this.gestor = new GestorAuxiliarParaSistema();
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
+	}
+	
+	@Before
+	public void iniciarTutorTest() {
+		this.gestort = new GestorDeTutor();
+		assertFalse("O sistema de tutoria iniciou acabado", gestort.finalizou());
+	}
+	
+	@Before
+	public void iniciarAlunoTest() {
+		this.gestorA = new GestorDeAluno();
+		assertFalse("O sistema de tutoria iniciou acabado", gestorA.finalizou());
 	}
 
 	// Tutor
@@ -147,61 +160,61 @@ public class TestMainProject {
 
 	@Test
 	public void verificarListaDeAlunoVaziaTest() {
-		List<Aluno> listAluno = gestor.getListaDeAlunosCadastrados();
+		List<Aluno> listAluno = gestorA.getListaDeAlunosCadastrados();
 		assertEquals(0, listAluno.size());
 	}
 
 	@Test
 	public void cadastraAlunoTest() throws Exception {
 		Aluno alunos = new Aluno("Otaciso", "81011053");
-		gestor.cadastrarAluno(alunos);
-		List<Aluno> listAluno = gestor.getListaDeAlunosCadastrados();
+		gestorA.cadastrarAluno(alunos);
+		List<Aluno> listAluno = gestorA.getListaDeAlunosCadastrados();
 		assertEquals(1, listAluno.size());
 	}
 
 	@Test
 	public void verificaAlunoCadastradoNaLista() throws Exception {
 		Aluno a = new Aluno("Otaciso", "12345");
-		gestor.cadastrarAluno(a);
-		List<Aluno> lista = gestor.getListaDeAlunosCadastrados();
+		gestorA.cadastrarAluno(a);
+		List<Aluno> lista = gestorA.getListaDeAlunosCadastrados();
 		assertEquals(a, lista.get(0));
 	}
 
 	@Test
 	public void pesquisarAlunoPeloNomeTest() throws Exception {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
-		gestor.cadastrarAluno(aluno1);
-		assertEquals(aluno1, gestor.pesquisaAlunoPeloNome("Otaciso"));
+		gestorA.cadastrarAluno(aluno1);
+		assertEquals(aluno1, gestorA.pesquisaAlunoPeloNome("Otaciso"));
 	}
 
 	@Test
 	public void pesquisarAlunoPelaMatriculaTest() throws Exception {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
-		gestor.cadastrarAluno(aluno1);
-		assertEquals(aluno1, gestor.pesquisarAlunoPelaMatricula("81011053"));
+		gestorA.cadastrarAluno(aluno1);
+		assertEquals(aluno1, gestorA.pesquisarAlunoPelaMatricula("81011053"));
 	}
 
 	@Test(expected = AlunoDuplicadoException.class)
 	public void cadastrarMesmoAlunoTest() {
 		Aluno aluno1 = new Aluno("Otaciso", "81011053");
 		Aluno aluno2 = new Aluno("Otaciso", "81011053");
-		gestor.cadastrarAluno(aluno1);
-		gestor.cadastrarAluno(aluno2);
+		gestorA.cadastrarAluno(aluno1);
+		gestorA.cadastrarAluno(aluno2);
 	}
 
 	@Test(expected = AlunoDuplicadoException.class)
 	public void cadastrarAlunoComMesmaMatriculaTest() {
 		Aluno al1 = new Aluno("Otaciso", "81011055");
 		Aluno al2 = new Aluno("Daniel", "81011055");
-		gestor.cadastrarAluno(al1);
-		gestor.cadastrarAluno(al2);
+		gestorA.cadastrarAluno(al1);
+		gestorA.cadastrarAluno(al2);
 	}
 
 	@Test(expected = AlunoInexistenteException.class)
 	public void removerAlunoInexistenteTest() {
 		Aluno aluno = new Aluno("Thiego", "12345");
-		gestor.cadastrarAluno(aluno);
-		gestor.removerAlunoPelaMatricula("54321");
+		gestorA.cadastrarAluno(aluno);
+		gestorA.removerAlunoPelaMatricula("54321");
 	}
 
 	@Test(expected = AlunoDuplicadoException.class)
@@ -211,17 +224,17 @@ public class TestMainProject {
 		Aluno aIII = new Aluno(" OtacisoNos ", " 813011055 ");
 		Aluno aIV = new Aluno(" OtacisoVois ", " 813011056 ");
 		Aluno aV = new Aluno(" OtacisoEles ", " 813011057 ");
-		gestor.cadastrarAluno(aI);
-		gestor.cadastrarAluno(aII);
-		gestor.cadastrarAluno(aIII);
-		gestor.cadastrarAluno(aIV);
-		gestor.cadastrarAluno(aV);
-		gestor.removerAlunoPelaMatricula(aI.getMatricula());
-		gestor.removerAlunoPelaMatricula(aII.getMatricula());
-		gestor.removerAlunoPelaMatricula(aIII.getMatricula());
-		gestor.removerAlunoPelaMatricula(aIV.getMatricula());
-		gestor.removerAlunoPelaMatricula(aV.getMatricula());
-		List<Aluno> alunosCadastrados = gestor.getListaDeAlunosCadastrados();
+		gestorA.cadastrarAluno(aI);
+		gestorA.cadastrarAluno(aII);
+		gestorA.cadastrarAluno(aIII);
+		gestorA.cadastrarAluno(aIV);
+		gestorA.cadastrarAluno(aV);
+		gestorA.removerAlunoPelaMatricula(aI.getMatricula());
+		gestorA.removerAlunoPelaMatricula(aII.getMatricula());
+		gestorA.removerAlunoPelaMatricula(aIII.getMatricula());
+		gestorA.removerAlunoPelaMatricula(aIV.getMatricula());
+		gestorA.removerAlunoPelaMatricula(aV.getMatricula());
+		List<Aluno> alunosCadastrados = gestorA.getListaDeAlunosCadastrados();
 		assertEquals(0, alunosCadastrados.size());
 	}
 
@@ -232,12 +245,12 @@ public class TestMainProject {
 		Aluno aIII = new Aluno("Otaciso", "333333");
 		Aluno aIV = new Aluno("Thiego", "444444");
 		Aluno aV = new Aluno("Daniel", "555555");
-		gestor.cadastrarAluno(aI);
-		gestor.cadastrarAluno(aII);
-		gestor.cadastrarAluno(aIII);
-		gestor.cadastrarAluno(aIV);
-		gestor.cadastrarAluno(aV);
-		List<Aluno> alunoCadastrados = gestor.getListaDeAlunosCadastrados();
+		gestorA.cadastrarAluno(aI);
+		gestorA.cadastrarAluno(aII);
+		gestorA.cadastrarAluno(aIII);
+		gestorA.cadastrarAluno(aIV);
+		gestorA.cadastrarAluno(aV);
+		List<Aluno> alunoCadastrados = gestorA.getListaDeAlunosCadastrados();
 		assertEquals(5, alunoCadastrados.size());
 	}
 
@@ -329,10 +342,10 @@ public class TestMainProject {
 	public void cadastrarAlunoDuplicadoNoGrupoTest() {
 		Aluno alI = new Aluno(" Otaciso ", " 81011053");
 		Aluno alII = new Aluno(" Otaciso ", " 81011053");
-		gestor.cadastrarAluno(alI);
-		gestor.cadastrarAluno(alII);
-		Aluno aII = gestor.pesquisaAlunoPeloNome(" Otaciso ");
-		Aluno aIII = gestor.pesquisaAlunoPeloNome(" Otaciso ");
+		gestorA.cadastrarAluno(alI);
+		gestorA.cadastrarAluno(alII);
+		Aluno aII = gestorA.pesquisaAlunoPeloNome(" Otaciso ");
+		Aluno aIII = gestorA.pesquisaAlunoPeloNome(" Otaciso ");
 		Aula aulaI = new Aula("Aula de Login do Tablet com senha", " 02 ");
 		Aula aulaII = new Aula("Aula de Login do Tablet com senha e nome",
 				" 03 ");

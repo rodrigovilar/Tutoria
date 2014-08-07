@@ -9,21 +9,11 @@ import com.projeto.negocios.*;
 
 public class GestorAuxiliarParaSistema {
 
-	private List<Tutor> tutores;
-	private List<Aluno> alunos;
-	private List<Aula> aulas = new LinkedList<Aula>();
+	//private List<Aula> aulas = new LinkedList<Aula>();
 	private List<GrupoDiscussao> grupos = new LinkedList<GrupoDiscussao>();
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();
 
 	private List<Mensagem> mensagens = new ArrayList<>();
-
-	public void add(Aluno aluno) {
-		alunos.add(aluno);
-	}
-
-	public List<Aluno> getAluno() {
-		return alunos;
-	}
 
 	public void enviarMensagem(Aluno origem, Aluno destino, String texto) {
 
@@ -39,76 +29,8 @@ public class GestorAuxiliarParaSistema {
 		return mensagens;
 	}
 
-	public GestorAuxiliarParaSistema() {
-
-		tutores = new LinkedList<Tutor>();
-		alunos = new LinkedList<Aluno>();
-	}
-
 	public boolean finalizou() {
 		return false;
-	}
-
-	/*public void cadastrarTutor(Tutor tutorNovo) throws Exception {
-		boolean existe = false;
-		for (Tutor tutorAntigo : this.tutores) {
-			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())
-					|| tutorAntigo.getNome().equals(tutorNovo.getNome())) {
-				existe = true;
-				throw new TutorDuplicadoException();
-			}
-		}
-		if (existe == false) {
-			this.tutores.add(tutorNovo);
-		} else {
-			throw new TutorExistenteException("Tutor Existente");
-		}
-	}
-
-	public Tutor pesquisarTutorPeloId(String id)
-			throws TutorInexistenteException {
-		for (Tutor t : this.tutores) {
-			if (t.getMatricula().equals(id)) {
-				return t;
-			}
-		}
-		throw new TutorInexistenteException("Tutor Inexistente");
-	}
-
-	public void removeTutorPeloId(String id) throws Exception {
-		boolean removeu = false;
-		for (Tutor t : this.tutores) {
-			if (t.getMatricula().equals(id)) {
-				this.tutores.remove(t);
-				removeu = true;
-				break;
-			}
-		}
-
-		if (removeu == false) {
-			throw new TutorInexistenteException("Tutor não existe!");
-		}
-	}*/
-
-	// Aluno
-
-	public void cadastrarAluno(Aluno alunos)
-			throws GrupoDiscurssaoJaExisteException {
-		boolean existe = false;
-		for (Aluno aluno : this.alunos) {
-
-			if (aluno.getMatricula().equals(aluno.getMatricula())) {
-				existe = true;
-				throw new AlunoDuplicadoException();
-			}
-		}
-
-		if (existe == false) {
-			this.alunos.add(alunos);
-		} else {
-			throw new AlunoExistenteException("Aluno Existente!");
-		}// throw new ExcecaoAlunoDuplicado();
-
 	}
 
 	public void cadastrarAlunosParticipantes(Aluno al, GrupoDiscussao gd) {
@@ -116,53 +38,8 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public Aluno pesquisaAlunoPeloNome(String nome)
-			throws AlunoInexistenteException {
-		for (Aluno alu : this.alunos) {
-			if (alu.getNome().equals(nome)) {
-				return alu;
-			}
-		}
-		throw new AlunoInexistenteException("Aluno Inexistente");
-	}
-
-	public Aluno pesquisarAlunoPelaMatricula(String matricula)
-			throws AlunoInexistenteException {
-		for (Aluno aluno1 : this.alunos) {
-			if (aluno1.getMatricula().equals(matricula)) {
-				return aluno1;
-			}
-		}
-		throw new AlunoInexistenteException("Aluno Inexistente");
-	}
-
-	public void removerAlunoPelaMatricula(String matricula) {
-		boolean removeu = false;
-		for (Aluno a : this.alunos) {
-			if (a.getMatricula().equals(matricula)) {
-				this.alunos.remove(a);
-				removeu = true;
-				break;
-			}
-		}
-		if (removeu == false) {
-			throw new AlunoInexistenteException("Aluno não existe!");
-		}
-
-	}
-
-	public List<Aluno> getListaDeAlunosCadastrados() {
-
-		return alunos;
-	}
-
 	public List<GrupoDiscussao> getListaDeGruposCadastrados() {
 		return this.grupos;
-	}
-
-	public List<Tutor> getListaDeTutores() {
-
-		return tutores;
 	}
 
 	public void cadastrarAula(Aula aula) {
