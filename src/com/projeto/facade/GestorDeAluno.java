@@ -10,11 +10,12 @@ import com.projeto.exception.GrupoDiscurssaoJaExisteException;
 import com.projeto.negocios.Aluno;
 
 public class GestorDeAluno {
-	private List<Aluno> alunos;
-	
+
 	public boolean finalizou() {
 		return false;
 	}
+
+	private List<Aluno> alunos;
 
 	public GestorDeAluno() {
 
@@ -74,7 +75,7 @@ public class GestorDeAluno {
 		}
 
 	}
-	
+
 	public void add(Aluno aluno) {
 		alunos.add(aluno);
 	}

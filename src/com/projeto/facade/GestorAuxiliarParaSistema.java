@@ -42,7 +42,7 @@ public class GestorAuxiliarParaSistema {
 		return this.grupos;
 	}
 
-	public void cadastrarAula(Aula aula) {
+	/*public void cadastrarAula(Aula aula) {
 		this.aulas.add(aula);
 
 	}
@@ -51,26 +51,26 @@ public class GestorAuxiliarParaSistema {
 
 		return aulas;
 	}
-
+*/
 	public void cadastrarArquivos(Arquivo arquivo) {
 		this.arquivos.add(arquivo);
 
 	}
 
-	public List<Aula> getListaDeAulasCadastradasPorGrupo(GrupoDiscussao gd1) {
+	/*public List<Aula> getListaDeAulasCadastradasPorGrupo(GrupoDiscussao gd1) {
 
 		return aulas;
 	}
-
+*/
 	public List<Arquivo> getListaDeArquivos() {
 
 		return arquivos;
 	}
 
-	public void removerAulaDoGrupoDiscursao(Aula a1, GrupoDiscussao gd1) {
+	/*public void removerAulaDoGrupoDiscursao(Aula a1, GrupoDiscussao gd1) {
 		this.aulas.remove(0).getIdAula();
 
-	}
+	}*/
 
 	public void cadastrarGrupoDiscursao(GrupoDiscussao grupod)
 			throws GrupoDiscurssaoJaExisteException {
@@ -105,16 +105,16 @@ public class GestorAuxiliarParaSistema {
 
 	}
 
-	public Aula pesquisaAula(String iDAul) {
+	/*public Aula pesquisaAula(String iDAul) {
 		for (Aula aa : this.aulas) {
 			if (aa.getIdAula().equals(iDAul)) {
 				return aa;
 			}
 		}
 		return null;
-	}
+	}*/
 
-	public void removerAula(String iDAula) {
+	/*public void removerAula(String iDAula) {
 		boolean removeu = false;
 		for (Aula a : this.aulas) {
 			if (a.getIdAula().equals(iDAula)) {
@@ -127,13 +127,13 @@ public class GestorAuxiliarParaSistema {
 			throw new RuntimeException("ERRO!");
 		}
 	}
-
+*/
 	public void removerArquivo(String iDArquivo)
 			throws ArquivoInexistenteException {
 		boolean removeu = false;
 		for (Arquivo a : this.arquivos) {
 			if (a.getIdArquivo().equals(iDArquivo)) {
-				this.aulas.remove(a);
+				this.arquivos.remove(a);
 				removeu = true;
 				break;
 			}
