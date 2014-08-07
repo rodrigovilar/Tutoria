@@ -1,4 +1,4 @@
-package com.projeto.negocios;
+package com.projeto.Negocios;
 
 public class LoginTutor {
 

@@ -1,12 +1,12 @@
-package com.projeto.facade;
+package com.projeto.Gestor;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.TutorDuplicadoException;
-import com.projeto.exception.TutorExistenteException;
-import com.projeto.exception.TutorInexistenteException;
-import com.projeto.negocios.Tutor;
+import com.projeto.Entidades.Tutor;
+import com.projeto.Exception.TutorDuplicadoException;
+import com.projeto.Exception.TutorExistenteException;
+import com.projeto.Exception.TutorInexistenteException;
 
 public class GestorDeTutor {
 

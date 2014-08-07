@@ -1,4 +1,4 @@
-package com.projeto.exception;
+package com.projeto.Exception;
 
 @SuppressWarnings("serial")
 public class TutorExistenteException extends RuntimeException {

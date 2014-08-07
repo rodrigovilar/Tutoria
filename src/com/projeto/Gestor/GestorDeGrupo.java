@@ -1,12 +1,12 @@
-package com.projeto.facade;
+package com.projeto.Gestor;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.GrupoDiscurssaoJaExisteException;
-import com.projeto.negocios.Aluno;
-import com.projeto.negocios.Aula;
-import com.projeto.negocios.GrupoDiscussao;
+import com.projeto.Entidades.Aluno;
+import com.projeto.Exception.GrupoDiscurssaoJaExisteException;
+import com.projeto.Negocios.Aula;
+import com.projeto.Negocios.GrupoDiscussao;
 
 public class GestorDeGrupo {
 	private List<GrupoDiscussao> gruposd = new LinkedList<GrupoDiscussao>();

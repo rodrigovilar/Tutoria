@@ -1,6 +1,6 @@
-package com.projeto.negocios;
+package com.projeto.Entidades;
 
-import com.projeto.exception.ExcecaoIllegalArgumentException;
+import com.projeto.Exception.ExcecaoIllegalArgumentException;
 
 public class Aluno extends Pessoa {
 

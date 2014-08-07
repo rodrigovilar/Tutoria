@@ -1,6 +1,6 @@
-package com.projeto.negocios;
+package com.projeto.Negocios;
 
-import com.projeto.exception.ArquivoInexistenteException;
+import com.projeto.Exception.ArquivoInexistenteException;
 
 public class Arquivo {
 

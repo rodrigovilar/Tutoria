@@ -1,4 +1,6 @@
-package com.projeto.negocios;
+package com.projeto.Negocios;
+
+import com.projeto.Entidades.Aluno;
 
 
 public class Mensagem {

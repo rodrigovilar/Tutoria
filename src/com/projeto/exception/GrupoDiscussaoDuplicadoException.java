@@ -1,4 +1,4 @@
-package com.projeto.exception;
+package com.projeto.Exception;
 
 public class GrupoDiscussaoDuplicadoException {
 

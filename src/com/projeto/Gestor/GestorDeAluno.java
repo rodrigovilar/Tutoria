@@ -1,13 +1,13 @@
-package com.projeto.facade;
+package com.projeto.Gestor;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.AlunoDuplicadoException;
-import com.projeto.exception.AlunoExistenteException;
-import com.projeto.exception.AlunoInexistenteException;
-import com.projeto.exception.GrupoDiscurssaoJaExisteException;
-import com.projeto.negocios.Aluno;
+import com.projeto.Entidades.Aluno;
+import com.projeto.Exception.AlunoDuplicadoException;
+import com.projeto.Exception.AlunoExistenteException;
+import com.projeto.Exception.AlunoInexistenteException;
+import com.projeto.Exception.GrupoDiscurssaoJaExisteException;
 
 public class GestorDeAluno {
 

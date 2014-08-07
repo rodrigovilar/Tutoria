@@ -1,4 +1,4 @@
-package com.projeto.facade;
+package com.projeto.Main;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,16 @@ import java.util.List;
 
 import org.junit.*;
 
-import com.projeto.exception.*;
-import com.projeto.negocios.*;
+import com.projeto.Entidades.Aluno;
+import com.projeto.Entidades.Tutor;
+import com.projeto.Exception.*;
+import com.projeto.Gestor.GestorDeAluno;
+import com.projeto.Gestor.GestorDeArquivo;
+import com.projeto.Gestor.GestorDeAula;
+import com.projeto.Gestor.GestorDeGrupo;
+import com.projeto.Gestor.GestorDeMsn;
+import com.projeto.Gestor.GestorDeTutor;
+import com.projeto.Negocios.*;
 
 public class TestMainProject {
 	private GestorDeMsn gestor;

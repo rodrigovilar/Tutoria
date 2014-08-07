@@ -1,10 +1,10 @@
-package com.projeto.facade;
+package com.projeto.Gestor;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.ArquivoInexistenteException;
-import com.projeto.negocios.Arquivo;
+import com.projeto.Exception.ArquivoInexistenteException;
+import com.projeto.Negocios.Arquivo;
 
 public class GestorDeArquivo {
 	private List<Arquivo> arquivos = new LinkedList<Arquivo>();

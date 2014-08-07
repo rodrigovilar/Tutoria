@@ -1,10 +1,10 @@
-package com.projeto.facade;
+package com.projeto.Gestor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projeto.negocios.Aluno;
-import com.projeto.negocios.Mensagem;
+import com.projeto.Entidades.Aluno;
+import com.projeto.Negocios.Mensagem;
 
 public class GestorDeMsn {
 

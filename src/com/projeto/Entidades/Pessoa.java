@@ -1,4 +1,4 @@
-package com.projeto.negocios;
+package com.projeto.Entidades;
 
 public class Pessoa {
 

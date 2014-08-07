@@ -1,4 +1,4 @@
-package com.projeto.facade;
+package com.projeto.Main;
 
 public interface AssinaturaDosMetodos {
 	void enviarMensagem();

@@ -1,10 +1,11 @@
-package com.projeto.negocios;
+package com.projeto.Negocios;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.projeto.exception.AlunoExistenteException;
-import com.projeto.exception.ExcecaoIllegalArgumentException;
+import com.projeto.Entidades.Aluno;
+import com.projeto.Exception.AlunoExistenteException;
+import com.projeto.Exception.ExcecaoIllegalArgumentException;
 
 public class GrupoDiscussao {
 	private List<Aula> aulas = new LinkedList<Aula>();
