@@ -14,29 +14,37 @@ public class TestMainProject {
 	private GestorDeTutor gestort;
 	private GestorDeAluno gestorA;
 	private GestorDeAula gestorAl;
+	private GestorDeGrupo gestorG;
 
 	@Before
 	public void iniciarTest() {
 		this.gestor = new GestorAuxiliarParaSistema();
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
 	}
-	
+
 	@Before
-	public void iniciarTutorTest() {
+	public void iniciarTutor() {
 		this.gestort = new GestorDeTutor();
 		assertFalse("O sistema de tutoria iniciou acabado", gestort.finalizou());
 	}
-	
+
 	@Before
-	public void iniciarAlunoTest() {
+	public void iniciarAluno() {
 		this.gestorA = new GestorDeAluno();
 		assertFalse("O sistema de tutoria iniciou acabado", gestorA.finalizou());
 	}
-	
+
 	@Before
-	public void iniciarAulaTest() {
+	public void iniciarGestorDeAula() {
 		this.gestorAl = new GestorDeAula();
-		assertFalse("O sistema de tutoria iniciou acabado", gestorAl.finalizou());
+		assertFalse("O sistema de tutoria iniciou acabado",
+				gestorAl.finalizou());
+	}
+
+	@Before
+	public void iniciarGestorDeGrupo() {
+		this.gestorG = new GestorDeGrupo();
+		assertFalse("O sistema de tutoria iniciou acabado", gestorG.finalizou());
 	}
 
 	// Tutor
@@ -274,12 +282,12 @@ public class TestMainProject {
 		Aula aula = new Aula("Aula de Login do Tablet", "01");
 		gestorAl.cadastrarAula(aula);
 		GrupoDiscussao grupo = new GrupoDiscussao(aula, "A-01");
-		gestor.cadastrarGrupoDiscursao(grupo);
-		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
+		gestorG.cadastrarGrupoDiscursao(grupo);
+		assertEquals(grupo, gestorG.pesquisarGrupo("A-01"));
 	}
 
 	public void verificarListaGrupoDiscurssaoCadastradoVaziaTest() {
-		List<GrupoDiscussao> listGrupo = gestor.getListaDeGruposCadastrados();
+		List<GrupoDiscussao> listGrupo = gestorG.getListaDeGruposCadastrados();
 		assertEquals(0, listGrupo.size());
 	}
 
@@ -288,8 +296,8 @@ public class TestMainProject {
 		Aula aula = new Aula("Aula de Instalação de App", "-01");
 		gestorAl.cadastrarAula(aula);
 		GrupoDiscussao grupo = new GrupoDiscussao(aula, "X-01");
-		gestor.cadastrarGrupoDiscursao(grupo);
-		List<GrupoDiscussao> listgd = gestor.getListaDeGruposCadastrados();
+		gestorG.cadastrarGrupoDiscursao(grupo);
+		List<GrupoDiscussao> listgd = gestorG.getListaDeGruposCadastrados();
 		assertEquals(grupo, listgd.get(0));
 	}
 
@@ -299,11 +307,11 @@ public class TestMainProject {
 		Aula aula = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestorAl.cadastrarAula(aula);
 		GrupoDiscussao grupod = new GrupoDiscussao(aula, "A-02");
-		gestor.cadastrarGrupoDiscursao(grupod);
+		gestorG.cadastrarGrupoDiscursao(grupod);
 		Aula aulaII = new Aula("Enviar Exercio ao Modle", "03");
 		gestorAl.cadastrarAula(aulaII);
 		GrupoDiscussao grupod2 = new GrupoDiscussao(aula, "A-02");
-		gestor.cadastrarGrupoDiscursao(grupod2);
+		gestorG.cadastrarGrupoDiscursao(grupod2);
 	}
 
 	@Test
@@ -312,20 +320,20 @@ public class TestMainProject {
 		Aula aI = new Aula("Acessar a plataforma EAD pelo tablet", "02");
 		gestorAl.cadastrarAula(aI);
 		GrupoDiscussao grupoD_I = new GrupoDiscussao(aI, "Grupo I");
-		gestor.cadastrarGrupoDiscursao(grupoD_I);
+		gestorG.cadastrarGrupoDiscursao(grupoD_I);
 		Aula aII = new Aula("Enviar Exercio ao Modle", "03");
 		gestorAl.cadastrarAula(aII);
 		GrupoDiscussao grupoD_II = new GrupoDiscussao(aII, "Grupo II");
-		gestor.cadastrarGrupoDiscursao(grupoD_II);
+		gestorG.cadastrarGrupoDiscursao(grupoD_II);
 		Aula aIII = new Aula("Aula de Login do Tablet", "01");
 		gestorAl.cadastrarAula(aIII);
 		GrupoDiscussao grupoD_III = new GrupoDiscussao(aIII, "Grupo III");
-		gestor.cadastrarGrupoDiscursao(grupoD_III);
+		gestorG.cadastrarGrupoDiscursao(grupoD_III);
 		Aula aIV = new Aula("Acessar aulas no moodle", "04");
 		gestorAl.cadastrarAula(aIV);
 		GrupoDiscussao grupoD_IV = new GrupoDiscussao(aIV, "Grupo IV");
-		gestor.cadastrarGrupoDiscursao(grupoD_IV);
-		List<GrupoDiscussao> qtdGrupoCadastrados = gestor
+		gestorG.cadastrarGrupoDiscursao(grupoD_IV);
+		List<GrupoDiscussao> qtdGrupoCadastrados = gestorG
 				.getListaDeGruposCadastrados();
 		assertEquals(4, qtdGrupoCadastrados.size());
 	}
@@ -334,11 +342,11 @@ public class TestMainProject {
 	public void cadastrarAlunoNoGrupoDiscurssaoTest() {
 		Aula al = new Aula("Aula de Login do Tablet", "01");
 		GrupoDiscussao gd = new GrupoDiscussao(al, " 05 ");
-		gestor.cadastrarGrupoDiscursao(gd);
+		gestorG.cadastrarGrupoDiscursao(gd);
 		Aluno aI = new Aluno(" Daniel ", " 011053 ");
 		Aluno aII = new Aluno(" Thiego ", " 011054 ");
-		gestor.cadastrarAlunosParticipantes(aI, gd);
-		gestor.cadastrarAlunosParticipantes(aII, gd);
+		gestorG.cadastrarAlunosParticipantes(aI, gd);
+		gestorG.cadastrarAlunosParticipantes(aII, gd);
 		List<Aluno> alunosParticipantes = gd.listaDeAlunosParticipantes();
 		assertEquals(2, alunosParticipantes.size());
 		assertEquals(aI, alunosParticipantes.get(0));
@@ -358,8 +366,8 @@ public class TestMainProject {
 				" 03 ");
 		GrupoDiscussao gdI = new GrupoDiscussao(aulaI, " 02 ");
 		GrupoDiscussao gdII = new GrupoDiscussao(aulaII, " 03 ");
-		gestor.cadastrarAlunosParticipantes(aII, gdI);
-		gestor.cadastrarAlunosParticipantes(aIII, gdII);
+		gestorG.cadastrarAlunosParticipantes(aII, gdI);
+		gestorG.cadastrarAlunosParticipantes(aIII, gdII);
 	}
 
 	@Test
@@ -367,8 +375,8 @@ public class TestMainProject {
 		Aula aula = new Aula("Aula de Login do Tablet", "01");
 		gestorAl.cadastrarAula(aula);
 		GrupoDiscussao grupo = new GrupoDiscussao(aula, "A-01");
-		gestor.cadastrarGrupoDiscursao(grupo);
-		assertEquals(grupo, gestor.pesquisarGrupo("A-01"));
+		gestorG.cadastrarGrupoDiscursao(grupo);
+		assertEquals(grupo, gestorG.pesquisarGrupo("A-01"));
 		Aluno aluno1 = new Aluno(" Otaciso ", "81011053");
 		Aluno aluno2 = new Aluno(" Thiego ", "81011052");
 		gestor.enviarMensagem(aluno1, aluno2, "Quer tc?");
@@ -415,8 +423,8 @@ public class TestMainProject {
 		Aula a = new Aula("Enviar Exercio ao Modle", "03");
 		gestorAl.cadastrarAula(a);
 		GrupoDiscussao gd = new GrupoDiscussao(a, "A-03");
-		gestor.cadastrarGrupoDiscursao(gd);
-		gestor.adicionarAulaAoGrupo(a, gd);
+		gestorG.cadastrarGrupoDiscursao(gd);
+		gestorG.adicionarAulaAoGrupo(a, gd);
 		List<Aula> aulas = gestorAl.getListaDeAulasCadastradasPorGrupo(gd);
 		assertEquals(1, aulas.size());
 	}
@@ -460,10 +468,10 @@ public class TestMainProject {
 		Aula a = new Aula("Enviar Exercio ao Modle", "05");
 		gestorAl.cadastrarAula(a);
 		GrupoDiscussao gd = new GrupoDiscussao("0000-1");
-		gestor.cadastrarGrupoDiscursao(gd);
+		gestorG.cadastrarGrupoDiscursao(gd);
 		Aula a1 = gestorAl.pesquisaAula("05");
-		GrupoDiscussao gd1 = gestor.pesquisarGrupo("0000-1");
-		gestor.adicionarAulaAoGrupo(a1, gd1);
+		GrupoDiscussao gd1 = gestorG.pesquisarGrupo("0000-1");
+		gestorG.adicionarAulaAoGrupo(a1, gd1);
 		gestorAl.removerAulaDoGrupoDiscursao(a1, gd1);
 		List<Aula> aulas = gestorAl.getListaDeAulasCadastradasPorGrupo(gd1);
 		assertEquals(0, aulas.size());
