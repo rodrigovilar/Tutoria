@@ -15,36 +15,22 @@ public class TestMainProject {
 	private GestorDeAluno gestorA;
 	private GestorDeAula gestorAl;
 	private GestorDeGrupo gestorG;
+	private GestorDeArquivo gestorAq;
 
 	@Before
-	public void iniciarTest() {
+	public void iniciarGestorTest() {
 		this.gestor = new GestorAuxiliarParaSistema();
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
-	}
-
-	@Before
-	public void iniciarTutor() {
-		this.gestort = new GestorDeTutor();
-		assertFalse("O sistema de tutoria iniciou acabado", gestort.finalizou());
-	}
-
-	@Before
-	public void iniciarAluno() {
-		this.gestorA = new GestorDeAluno();
-		assertFalse("O sistema de tutoria iniciou acabado", gestorA.finalizou());
-	}
-
-	@Before
-	public void iniciarGestorDeAula() {
 		this.gestorAl = new GestorDeAula();
-		assertFalse("O sistema de tutoria iniciou acabado",
-				gestorAl.finalizou());
-	}
-
-	@Before
-	public void iniciarGestorDeGrupo() {
+		assertFalse("O sistema de tutoria iniciou acabado", gestorAl.finalizou());
 		this.gestorG = new GestorDeGrupo();
 		assertFalse("O sistema de tutoria iniciou acabado", gestorG.finalizou());
+		this.gestorAq = new GestorDeArquivo();
+		assertFalse("O sistema de tutoria iniciou acabado", gestorAq.finalizou());
+		this.gestorA = new GestorDeAluno();
+		assertFalse("O sistema de tutoria iniciou acabado", gestorA.finalizou());
+		this.gestort = new GestorDeTutor();
+		assertFalse("O sistema de tutoria iniciou acabado", gestort.finalizou());
 	}
 
 	// Tutor
@@ -487,22 +473,22 @@ public class TestMainProject {
 	@Test
 	public void cadastrarArquivoTest() throws Exception {
 		Arquivo a = new Arquivo("Segundo dia de aula", "0002");
-		gestor.cadastrarArquivos(a);
-		List<Arquivo> listArquivos = gestor.getListaDeArquivos();
+		gestorAq.cadastrarArquivos(a);
+		List<Arquivo> listArquivos = gestorAq.getListaDeArquivos();
 		assertEquals(1, listArquivos.size());
 	}
 
 	@Test
 	public void verificarListaDeArquivoVaziaTest() {
-		List<Arquivo> listArquivo = gestor.getListaDeArquivos();
+		List<Arquivo> listArquivo = gestorAq.getListaDeArquivos();
 		assertEquals(0, listArquivo.size());
 	}
 
 	@Test
 	public void verificaArquivoCadastradaNaLista() throws Exception {
 		Arquivo a = new Arquivo("Primeiro dia de aula", "0001");
-		gestor.cadastrarArquivos(a);
-		List<Arquivo> listArquivos = gestor.getListaDeArquivos();
+		gestorAq.cadastrarArquivos(a);
+		List<Arquivo> listArquivos = gestorAq.getListaDeArquivos();
 		assertEquals(a, listArquivos.get(0));
 	}
 
@@ -510,9 +496,9 @@ public class TestMainProject {
 	public void removerArquivosTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
 				"MEC-19823-01");
-		gestor.cadastrarArquivos(aq);
-		gestor.removerArquivo("MEC-19823-01");
-		List<Arquivo> lista = gestor.getListaDeArquivos();
+		gestorAq.cadastrarArquivos(aq);
+		gestorAq.removerArquivo("MEC-19823-01");
+		List<Arquivo> lista = gestorAq.getListaDeArquivos();
 		assertEquals(0, lista.size());
 	}
 
@@ -520,8 +506,8 @@ public class TestMainProject {
 	public void pesquisarArquivosNoForumTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
 				"MEC-19823-01");
-		gestor.cadastrarArquivos(aq);
-		Arquivo arq = gestor.pesquisarArquivos("MEC-19823-01");
+		gestorAq.cadastrarArquivos(aq);
+		Arquivo arq = gestorAq.pesquisarArquivos("MEC-19823-01");
 		assertEquals(aq, arq);
 	}
 
@@ -529,26 +515,26 @@ public class TestMainProject {
 	public void removerArquivoInexistenteTest() {
 		Arquivo aq = new Arquivo("Tablets Nas Escolas Publicas.pdf",
 				"MEC-19823-01");
-		gestor.cadastrarArquivos(aq);
-		gestor.pesquisarArquivos("MEC-19823-01");
-		gestor.removerArquivo("MEC-19823");
+		gestorAq.cadastrarArquivos(aq);
+		gestorAq.pesquisarArquivos("MEC-19823-01");
+		gestorAq.removerArquivo("MEC-19823");
 
 	}
 
 	@Test(expected = ArquivoInexistenteException.class)
 	public void pesquisarArquivoInexistenteNoGrupoTest() {
 		Arquivo aq = new Arquivo(" Notebook.wma ", " MEC-00000-0 ");
-		gestor.cadastrarArquivos(aq);
-		gestor.pesquisarArquivos(" MEC-00000-00000 ");
+		gestorAq.cadastrarArquivos(aq);
+		gestorAq.pesquisarArquivos(" MEC-00000-00000 ");
 	}
 
 	@Test
 	public void pesquisarArquivoCadastradoPeloNomeNoGrupo()
 			throws ArquivoInexistenteException {
 		Arquivo a = new Arquivo("Tablets Nas Escolas.pdf", "MEC-0988776-01");
-		gestor.cadastrarArquivos(a);
+		gestorAq.cadastrarArquivos(a);
 		assertEquals(a,
-				gestor.removerArquivoPeloNome("Tablets Nas Escolas.pdf"));
+				gestorAq.removerArquivoPeloNome("Tablets Nas Escolas.pdf"));
 	}
 
 }
