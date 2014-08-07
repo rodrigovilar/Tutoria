@@ -11,6 +11,7 @@ import com.projeto.negocios.*;
 
 public class TestMainProject {
 	private GestorAuxiliarParaSistema gestor;
+	private GestorDeTutor gestort = new GestorDeTutor();
 
 	@Before
 	public void iniciarTest() {
@@ -27,23 +28,23 @@ public class TestMainProject {
 
 	@Test
 	public void verificarListaDeTutorVaziaTest() {
-		List<Tutor> listTutor = gestor.getListaDeTutores();
+		List<Tutor> listTutor = gestort.getListaDeTutores();
 		assertEquals(0, listTutor.size());
 	}
 
 	@Test
 	public void cadastrarTutorNoSistemaTest() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
-		gestor.cadastrarTutor(tut);
-		List<Tutor> listTut = gestor.getListaDeTutores();
+		gestort.cadastrarTutor(tut);
+		List<Tutor> listTut = gestort.getListaDeTutores();
 		assertEquals(1, listTut.size());
 	}
 
 	@Test
 	public void verificaTutorCadastradoNaLista() throws Exception {
 		Tutor tut = new Tutor("Otaciso", "12345");
-		gestor.cadastrarTutor(tut);
-		List<Tutor> listTut = gestor.getListaDeTutores();
+		gestort.cadastrarTutor(tut);
+		List<Tutor> listTut = gestort.getListaDeTutores();
 		assertEquals(tut, listTut.get(0));
 	}
 
@@ -58,38 +59,38 @@ public class TestMainProject {
 	@Test
 	public void pesquisarTutorPeloIdTest() throws Exception {
 		Tutor t = new Tutor("Otaciso", "12345");
-		gestor.cadastrarTutor(t);
-		assertEquals(t, gestor.pesquisarTutorPeloId("12345"));
+		gestort.cadastrarTutor(t);
+		assertEquals(t, gestort.pesquisarTutorPeloId("12345"));
 	}
 
 	@Test
 	public void removerTutorPeloIdTest() throws Exception {
 		Tutor tutor = new Tutor("Otaciso", "12345");
-		gestor.cadastrarTutor(tutor);
-		gestor.removeTutorPeloId("12345");
+		gestort.cadastrarTutor(tutor);
+		gestort.removeTutorPeloId("12345");
 	}
 
 	@Test(expected = TutorDuplicadoException.class)
 	public void cadastrarMesmoTutorTest() throws Exception {
 		Tutor tu1 = new Tutor("Otaciso", "123.456.789.01");
-		Tutor tu2 = new Tutor("Otaciso", "123.456.789");
-		gestor.cadastrarTutor(tu1);
-		gestor.cadastrarTutor(tu2);
+		Tutor tu2 = new Tutor("Otaciso", "123.456.789.01");
+		gestort.cadastrarTutor(tu1);
+		gestort.cadastrarTutor(tu2);
 	}
 
 	@Test(expected = TutorDuplicadoException.class)
 	public void cadastrarTutorComMesmaMatriculaTest() throws Exception {
 		Tutor t1 = new Tutor("Otaciso", "123.456");
 		Tutor t2 = new Tutor("Daniel", "123.456");
-		gestor.cadastrarTutor(t1);
-		gestor.cadastrarTutor(t2);
+		gestort.cadastrarTutor(t1);
+		gestort.cadastrarTutor(t2);
 	}
 
 	@Test(expected = TutorInexistenteException.class)
 	public void removerTutorInexistenteTest() throws Exception {
 		Tutor tutor = new Tutor("Thiego", "12345");
-		gestor.cadastrarTutor(tutor);
-		gestor.removeTutorPeloId("54321");
+		gestort.cadastrarTutor(tutor);
+		gestort.removeTutorPeloId("54321");
 	}
 
 	@Test
@@ -99,33 +100,33 @@ public class TestMainProject {
 		Tutor t3 = new Tutor("Otaciso", "333333");
 		Tutor t4 = new Tutor("Thiego", "444444");
 		Tutor t5 = new Tutor("Daniel", "555555");
-		gestor.cadastrarTutor(t1);
-		gestor.cadastrarTutor(t2);
-		gestor.cadastrarTutor(t3);
-		gestor.cadastrarTutor(t4);
-		gestor.cadastrarTutor(t5);
-		List<Tutor> listaTut = gestor.getListaDeTutores();
+		gestort.cadastrarTutor(t1);
+		gestort.cadastrarTutor(t2);
+		gestort.cadastrarTutor(t3);
+		gestort.cadastrarTutor(t4);
+		gestort.cadastrarTutor(t5);
+		List<Tutor> listaTut = gestort.getListaDeTutores();
 		assertEquals(5, listaTut.size());
 	}
 
-	@Test(expected = TutorDuplicadoException.class)
-	public void removeTutoresCadastrados() throws Exception {
-		Tutor tI = new Tutor(" OtacisoEu1 ", " 813011053 ");
+	@Test
+	public void removerTutoresCadastrados() throws Exception {
+		Tutor tI = new Tutor(" OtacisoEu1 ", "813011053");
 		Tutor tII = new Tutor(" OtacisoTu2 ", " 813011054 ");
 		Tutor tIII = new Tutor(" OtacisoNos3 ", " 813011055 ");
 		Tutor tIV = new Tutor(" OtacisoVois4 ", " 813011056 ");
 		Tutor tV = new Tutor(" OtacisoEles5 ", " 813011057 ");
-		gestor.cadastrarTutor(tI);
-		gestor.cadastrarTutor(tII);
-		gestor.cadastrarTutor(tII);
-		gestor.cadastrarTutor(tIV);
-		gestor.cadastrarTutor(tV);
-		gestor.removeTutorPeloId(tI.getMatricula());
-		gestor.removeTutorPeloId(tII.getMatricula());
-		gestor.removeTutorPeloId(tIII.getMatricula());
-		gestor.removeTutorPeloId(tIV.getMatricula());
-		gestor.removeTutorPeloId(tV.getMatricula());
-		List<Tutor> listaTut = gestor.getListaDeTutores();
+		gestort.cadastrarTutor(tI);
+		gestort.cadastrarTutor(tII);
+		gestort.cadastrarTutor(tIII);
+		gestort.cadastrarTutor(tIV);
+		gestort.cadastrarTutor(tV);
+		gestort.removeTutorPeloId(tI.getMatricula());
+		gestort.removeTutorPeloId(tII.getMatricula());
+		gestort.removeTutorPeloId(tIII.getMatricula());
+		gestort.removeTutorPeloId(tIV.getMatricula());
+		gestort.removeTutorPeloId(tV.getMatricula());
+		List<Tutor> listaTut = gestort.getListaDeTutores();
 		assertEquals(0, listaTut.size());
 
 	}
@@ -133,8 +134,8 @@ public class TestMainProject {
 	@Test(expected = TutorInexistenteException.class)
 	public void pesquisarTutorInexistenteTest() throws Exception {
 		Tutor t = new Tutor("Oscar", "12345");
-		gestor.cadastrarTutor(t);
-		gestor.pesquisarTutorPeloId("00000");
+		gestort.cadastrarTutor(t);
+		gestort.pesquisarTutorPeloId("00000");
 	}
 
 	// Aluno 2

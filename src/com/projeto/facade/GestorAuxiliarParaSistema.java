@@ -49,7 +49,7 @@ public class GestorAuxiliarParaSistema {
 		return false;
 	}
 
-	public void cadastrarTutor(Tutor tutorNovo) throws Exception {
+	/*public void cadastrarTutor(Tutor tutorNovo) throws Exception {
 		boolean existe = false;
 		for (Tutor tutorAntigo : this.tutores) {
 			if (tutorAntigo.getMatricula().equals(tutorNovo.getMatricula())
@@ -88,7 +88,7 @@ public class GestorAuxiliarParaSistema {
 		if (removeu == false) {
 			throw new TutorInexistenteException("Tutor não existe!");
 		}
-	}
+	}*/
 
 	// Aluno
 
