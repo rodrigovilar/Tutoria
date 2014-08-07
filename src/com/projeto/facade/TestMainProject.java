@@ -10,7 +10,7 @@ import com.projeto.exception.*;
 import com.projeto.negocios.*;
 
 public class TestMainProject {
-	private GestorAuxiliarParaSistema gestor;
+	private GestorDeMsn gestor;
 	private GestorDeTutor gestort;
 	private GestorDeAluno gestorA;
 	private GestorDeAula gestorAl;
@@ -19,7 +19,7 @@ public class TestMainProject {
 
 	@Before
 	public void iniciarGestorTest() {
-		this.gestor = new GestorAuxiliarParaSistema();
+		this.gestor = new GestorDeMsn();
 		assertFalse("O sistema de tutoria iniciou acabado", gestor.finalizou());
 		this.gestorAl = new GestorDeAula();
 		assertFalse("O sistema de tutoria iniciou acabado", gestorAl.finalizou());

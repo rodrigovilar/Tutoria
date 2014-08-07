@@ -6,7 +6,7 @@ import java.util.List;
 import com.projeto.negocios.Aluno;
 import com.projeto.negocios.Mensagem;
 
-public class GestorAuxiliarParaSistema {
+public class GestorDeMsn {
 
 	private List<Mensagem> mensagens = new ArrayList<>();
 
